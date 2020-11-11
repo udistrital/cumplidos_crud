@@ -22,7 +22,7 @@ El API provee la gestion de las diferentes procesos que requiere el sistema cump
 go get github.com/udistrital/cumplidos_crud
 
 #2. Moverse a la carpeta del repositorio
-cd $GOPATH/src/github.com/udistrital/cumplidos_cru
+cd $GOPATH/src/github.com/udistrital/cumplidos_crud
 
 # 3. Moverse a la rama **develop**
 git pull origin develop && git checkout develop
