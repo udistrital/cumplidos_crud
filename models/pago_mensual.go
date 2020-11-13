@@ -11,16 +11,18 @@ import (
 )
 
 type PagoMensual struct {
-	Id                int                `orm:"column(id);pk;auto"`
-	NumeroContrato    string             `orm:"column(numero_contrato)"`
-	VigenciaContrato  float64            `orm:"column(vigencia_contrato)"`
-	Mes               float64            `orm:"column(mes)"`
-	Persona           string             `orm:"column(persona)"`
-	EstadoPagoMensual *EstadoPagoMensual `orm:"column(estado_pago_mensual);rel(fk)"`
-	Responsable       string             `orm:"column(responsable)"`
-	FechaModificacion time.Time          `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
-	CargoResponsable  string             `orm:"column(cargo_responsable)"`
-	Ano               float64            `orm:"column(ano)"`
+	Id                     int                `orm:"column(id);pk;auto"`
+	NumeroContrato         string             `orm:"column(numero_contrato)"`
+	VigenciaContrato       float64            `orm:"column(vigencia_contrato)"`
+	Mes                    float64            `orm:"column(mes)"`
+	DocumentoPersonaId     string             `orm:"column(documento_persona_id)"`
+	EstadoPagoMensualId    *EstadoPagoMensual `orm:"column(estado_pago_mensual_id);rel(fk)"`
+	DocumentoResponsableId string             `orm:"column(documento_responsable_id)"`
+	CargoResponsable       string             `orm:"column(cargo_responsable)"`
+	Ano                    float64            `orm:"column(ano)"`
+	Activo                 bool               `orm:"column(activo)"`
+	FechaCreacion          time.Time          `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion      time.Time          `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
 }
 
 func (t *PagoMensual) TableName() string {

@@ -5,16 +5,20 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/astaxie/beego/orm"
 )
 
 type SoportePagoMensual struct {
-	Id                      int                      `orm:"column(id);pk;auto"`
-	PagoMensual             *PagoMensual             `orm:"column(pago_mensual);rel(fk)"`
-	Documento               int                      `orm:"column(documento)"`
-	ItemInformeTipoContrato *ItemInformeTipoContrato `orm:"column(item_informe_tipo_contrato);rel(fk)"`
-	Aprobado                bool                     `orm:"column(aprobado);null"`
+	Id                        int          `orm:"column(id);pk;auto"`
+	PagoMensualId             *PagoMensual `orm:"column(pago_mensual_id);rel(fk)"`
+	Documento                 int          `orm:"column(documento)"`
+	ItemInformeTipoContratoId int          `orm:"column(item_informe_tipo_contrato_id)"`
+	Aprobado                  bool         `orm:"column(aprobado);null"`
+	Activo                    bool         `orm:"column(activo)"`
+	FechaCreacion             time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion         time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
 }
 
 func (t *SoportePagoMensual) TableName() string {
