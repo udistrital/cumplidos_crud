@@ -730,6 +730,12 @@ definitions:
         type: string
       Descripcion:
         type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
       Id:
         type: integer
         format: int64
@@ -748,6 +754,12 @@ definitions:
         type: string
       Descripcion:
         type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
       Id:
         type: integer
         format: int64
@@ -760,25 +772,43 @@ definitions:
     title: ItemInformeTipoContrato
     type: object
     properties:
+      Activo:
+        type: boolean
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
       Id:
         type: integer
         format: int64
-      ItemInforme:
-        $ref: '#/definitions/models.ItemInforme'
-      TipoContrato:
+      ItemInformeId:
+        type: integer
+        format: int64
+      TipoContratoId:
         type: integer
         format: int64
   models.PagoMensual:
     title: PagoMensual
     type: object
     properties:
+      Activo:
+        type: boolean
       Ano:
         type: number
         format: double
       CargoResponsable:
         type: string
-      EstadoPagoMensual:
+      DocumentoPersonaId:
+        type: string
+      DocumentoResponsableId:
+        type: string
+      EstadoPagoMensualId:
         $ref: '#/definitions/models.EstadoPagoMensual'
+      FechaCreacion:
+        type: string
+        format: datetime
       FechaModificacion:
         type: string
         format: datetime
@@ -790,10 +820,6 @@ definitions:
         format: double
       NumeroContrato:
         type: string
-      Persona:
-        type: string
-      Responsable:
-        type: string
       VigenciaContrato:
         type: number
         format: double
@@ -801,19 +827,34 @@ definitions:
     title: SoportePagoMensual
     type: object
     properties:
+      Activo:
+        type: boolean
       Aprobado:
         type: boolean
       Documento:
         type: integer
         format: int64
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
       Id:
         type: integer
         format: int64
-      ItemInformeTipoContrato:
-        $ref: '#/definitions/models.ItemInformeTipoContrato'
-      PagoMensual:
+      ItemInformeTipoContratoId:
+        type: integer
+        format: int64
+      PagoMensualId:
         $ref: '#/definitions/models.PagoMensual'
 tags:
+- name: item_informe_tipo_contrato
+  description: |
+    ItemInformeTipoContratoController operations for ItemInformeTipoContrato
+- name: item_informe
+  description: |
+    ItemInformeController operations for ItemInforme
 - name: pago_mensual
   description: |
     PagoMensualController operations for PagoMensual
@@ -826,9 +867,3 @@ tags:
 - name: soporte_pago_mensual
   description: |
     SoportePagoMensualController operations for SoportePagoMensual
-- name: item_informe_tipo_contrato
-  description: |
-    ItemInformeTipoContratoController operations for ItemInformeTipoContrato
-- name: item_informe
-  description: |
-    ItemInformeController operations for ItemInforme

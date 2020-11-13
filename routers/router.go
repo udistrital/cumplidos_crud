@@ -16,6 +16,18 @@ import (
 func init() {
 	ns := beego.NewNamespace("/v1",
 
+		beego.NSNamespace("/item_informe_tipo_contrato",
+			beego.NSInclude(
+				&controllers.ItemInformeTipoContratoController{},
+			),
+		),
+
+		beego.NSNamespace("/item_informe",
+			beego.NSInclude(
+				&controllers.ItemInformeController{},
+			),
+		),
+
 		beego.NSNamespace("/pago_mensual",
 			beego.NSInclude(
 				&controllers.PagoMensualController{},
@@ -37,18 +49,6 @@ func init() {
 		beego.NSNamespace("/soporte_pago_mensual",
 			beego.NSInclude(
 				&controllers.SoportePagoMensualController{},
-			),
-		),
-
-		beego.NSNamespace("/item_informe_tipo_contrato",
-			beego.NSInclude(
-				&controllers.ItemInformeTipoContratoController{},
-			),
-		),
-
-		beego.NSNamespace("/item_informe",
-			beego.NSInclude(
-				&controllers.ItemInformeController{},
 			),
 		),
 	)

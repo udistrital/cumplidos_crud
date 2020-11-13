@@ -1102,6 +1102,14 @@
                 "Descripcion": {
                     "type": "string"
                 },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
@@ -1128,6 +1136,14 @@
                 "Descripcion": {
                     "type": "string"
                 },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
@@ -1145,14 +1161,26 @@
             "title": "ItemInformeTipoContrato",
             "type": "object",
             "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "ItemInforme": {
-                    "$ref": "#/definitions/models.ItemInforme"
+                "ItemInformeId": {
+                    "type": "integer",
+                    "format": "int64"
                 },
-                "TipoContrato": {
+                "TipoContratoId": {
                     "type": "integer",
                     "format": "int64"
                 }
@@ -1162,6 +1190,9 @@
             "title": "PagoMensual",
             "type": "object",
             "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
                 "Ano": {
                     "type": "number",
                     "format": "double"
@@ -1169,8 +1200,18 @@
                 "CargoResponsable": {
                     "type": "string"
                 },
-                "EstadoPagoMensual": {
+                "DocumentoPersonaId": {
+                    "type": "string"
+                },
+                "DocumentoResponsableId": {
+                    "type": "string"
+                },
+                "EstadoPagoMensualId": {
                     "$ref": "#/definitions/models.EstadoPagoMensual"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
                 },
                 "FechaModificacion": {
                     "type": "string",
@@ -1187,12 +1228,6 @@
                 "NumeroContrato": {
                     "type": "string"
                 },
-                "Persona": {
-                    "type": "string"
-                },
-                "Responsable": {
-                    "type": "string"
-                },
                 "VigenciaContrato": {
                     "type": "number",
                     "format": "double"
@@ -1203,6 +1238,9 @@
             "title": "SoportePagoMensual",
             "type": "object",
             "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
                 "Aprobado": {
                     "type": "boolean"
                 },
@@ -1210,20 +1248,37 @@
                     "type": "integer",
                     "format": "int64"
                 },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "ItemInformeTipoContrato": {
-                    "$ref": "#/definitions/models.ItemInformeTipoContrato"
+                "ItemInformeTipoContratoId": {
+                    "type": "integer",
+                    "format": "int64"
                 },
-                "PagoMensual": {
+                "PagoMensualId": {
                     "$ref": "#/definitions/models.PagoMensual"
                 }
             }
         }
     },
     "tags": [
+        {
+            "name": "item_informe_tipo_contrato",
+            "description": "ItemInformeTipoContratoController operations for ItemInformeTipoContrato\n"
+        },
+        {
+            "name": "item_informe",
+            "description": "ItemInformeController operations for ItemInforme\n"
+        },
         {
             "name": "pago_mensual",
             "description": "PagoMensualController operations for PagoMensual\n"
@@ -1239,14 +1294,6 @@
         {
             "name": "soporte_pago_mensual",
             "description": "SoportePagoMensualController operations for SoportePagoMensual\n"
-        },
-        {
-            "name": "item_informe_tipo_contrato",
-            "description": "ItemInformeTipoContratoController operations for ItemInformeTipoContrato\n"
-        },
-        {
-            "name": "item_informe",
-            "description": "ItemInformeController operations for ItemInforme\n"
         }
     ]
 }
