@@ -38,7 +38,16 @@ git pull origin develop && git checkout develop
 
 ### Ejecución docker-compose
 ```shell
-
+# 1. Obtener repositorio 
+git clone https://github.com/udistrital/cumplidos_crud.git
+# 2. Ir a la carpeta del repositorio
+cd $GOPATH/src/github.com/cumplidos_crud
+# 3. Cambiar a la rama develop
+git checkout develop
+# 4. Crear red back_end
+docker network create back_end
+# 5. Ejecutar docker compose
+docker-compose up --build
 ```
 
 ### Ejecución Pruebas 
