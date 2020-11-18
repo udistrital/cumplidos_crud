@@ -2,17 +2,19 @@ version: '3.4'
 
 services: 
   cumplidos_crud_api:
-    build: ./bee_build
-    image: ${SERVICE_NAME}
+
+    image: golang:1.15-alpine
     container_name: ${SERVICE_NAME}
     volumes:
       - go_src:/go
       - .:/go/src/${API_BASE_DIR}/${API_NAME}
+    environment:
+      - GO111MODULE=on
     env_file: 
       - .env
     ports: 
       - "${CUMPLIDOS_CRUD_API_ADMIN_PORT}:${CUMPLIDOS_CRUD_API_ADMIN_PORT}"   
-    command: sh -c 'cd ${API_BASE_DIR}/${API_NAME};go get -v -u ./...; bee run -downdoc=true -gendoc=true'
+    command: sh -c 'cd ${API_BASE_DIR}/${API_NAME};go get -v -u ./...;go mod init; bee run -downdoc=true -gendoc=true'
 
 
   
