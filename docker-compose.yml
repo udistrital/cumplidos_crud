@@ -14,10 +14,22 @@ services:
       - .env
     ports: 
       - "${CUMPLIDOS_CRUD_API_ADMIN_PORT}:${CUMPLIDOS_CRUD_API_ADMIN_PORT}"   
-    command: sh -c 'cd ${API_BASE_DIR}/${API_NAME};go get -v -u ./...;go mod init; bee run -downdoc=true -gendoc=true'
+    command: sh -c 'cd ${API_BASE_DIR}/${API_NAME};go get -u github.com/beego/bee ;go get -v -u ./...;go mod init; bee run -downdoc=true -gendoc=true'
+
+  data_base:
+    container_name: ${BD_NAME}
+    image: postgres:10.15-alpine
+    volumes: 
+        - postgres_data:/var/lib/postgresql/data
+    ports: 
+        - "5432:5432"        
+    env_file: 
+        - .env
+    networks: 
+        - back_end
 
 
-  
+
 volumes:
   go_src:
   postgres_data:
