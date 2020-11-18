@@ -19,3 +19,4 @@ swagger/lang/
 swagger/lib/
 .env
 go.mod
+go.sum

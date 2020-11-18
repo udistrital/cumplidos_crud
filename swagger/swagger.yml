@@ -47,8 +47,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.CambioEstadoPago'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - cambio_estado_pago
@@ -64,8 +64,8 @@ paths:
       responses:
         "201":
           description: '{int} models.CambioEstadoPago'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /cambio_estado_pago/{id}:
     get:
       tags:
@@ -83,8 +83,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.CambioEstadoPago'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - cambio_estado_pago
@@ -107,8 +107,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.CambioEstadoPago'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - cambio_estado_pago
@@ -123,8 +123,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /estado_pago_mensual/:
     get:
       tags:
@@ -161,8 +161,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.EstadoPagoMensual'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - estado_pago_mensual
@@ -178,8 +178,8 @@ paths:
       responses:
         "201":
           description: '{int} models.EstadoPagoMensual'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /estado_pago_mensual/{id}:
     get:
       tags:
@@ -197,8 +197,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.EstadoPagoMensual'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - estado_pago_mensual
@@ -221,8 +221,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.EstadoPagoMensual'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - estado_pago_mensual
@@ -237,8 +237,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /item_informe/:
     get:
       tags:
@@ -275,8 +275,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ItemInforme'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - item_informe
@@ -292,8 +292,8 @@ paths:
       responses:
         "201":
           description: '{int} models.ItemInforme'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /item_informe/{id}:
     get:
       tags:
@@ -311,8 +311,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ItemInforme'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - item_informe
@@ -335,8 +335,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ItemInforme'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - item_informe
@@ -351,8 +351,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /item_informe_tipo_contrato/:
     get:
       tags:
@@ -389,8 +389,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ItemInformeTipoContrato'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - item_informe_tipo_contrato
@@ -406,8 +406,8 @@ paths:
       responses:
         "201":
           description: '{int} models.ItemInformeTipoContrato'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /item_informe_tipo_contrato/{id}:
     get:
       tags:
@@ -425,8 +425,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ItemInformeTipoContrato'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - item_informe_tipo_contrato
@@ -449,8 +449,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ItemInformeTipoContrato'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - item_informe_tipo_contrato
@@ -465,8 +465,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /pago_mensual/:
     get:
       tags:
@@ -503,8 +503,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.PagoMensual'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - pago_mensual
@@ -520,8 +520,8 @@ paths:
       responses:
         "201":
           description: '{int} models.PagoMensual'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /pago_mensual/{id}:
     get:
       tags:
@@ -539,8 +539,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.PagoMensual'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - pago_mensual
@@ -563,8 +563,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.PagoMensual'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - pago_mensual
@@ -579,8 +579,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /soporte_pago_mensual/:
     get:
       tags:
@@ -617,8 +617,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.SoportePagoMensual'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - soporte_pago_mensual
@@ -634,8 +634,8 @@ paths:
       responses:
         "201":
           description: '{int} models.SoportePagoMensual'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /soporte_pago_mensual/{id}:
     get:
       tags:
@@ -653,8 +653,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.SoportePagoMensual'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - soporte_pago_mensual
@@ -677,8 +677,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.SoportePagoMensual'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - soporte_pago_mensual
@@ -693,8 +693,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
 definitions:
   models.CambioEstadoPago:
     title: CambioEstadoPago
