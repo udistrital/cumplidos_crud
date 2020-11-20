@@ -13,8 +13,9 @@ services:
     env_file: 
       - .env
     ports: 
-      - "${CUMPLIDOS_CRUD_API_ADMIN_PORT}:${CUMPLIDOS_CRUD_API_ADMIN_PORT}"   
-    command: sh -c 'cd ${API_BASE_DIR}/${API_NAME};go get -u github.com/beego/bee ;go get -v -u ./...;go mod init; bee run -downdoc=true -gendoc=true'
+      - "${CUMPLIDOS_CRUD_API_ADMIN_PORT}:${CUMPLIDOS_CRUD_API_ADMIN_PORT}"  
+    working_dir: /go/src
+    command: sh -c 'cd ${API_BASE_DIR}/${API_NAME};go get -u github.com/beego/bee ;go get -v -u ./...; pwd;go mod init; bee run -downdoc=true -gendoc=true'
 
   data_base:
     container_name: ${BD_NAME}
