@@ -8,13 +8,17 @@ El API provee la gestion de las diferentes procesos que requiere el sistema cump
 ### Tecnologías Implementadas y Versiones
 * [Golang](https://github.com/udistrital/introduccion_oas/blob/master/instalacion_de_herramientas/golang.md)
 * [BeeGo](https://github.com/udistrital/introduccion_oas/blob/master/instalacion_de_herramientas/beego.md)
+* [Docker](https://docs.docker.com/engine/install/ubuntu/)
+* [Docker Compose](https://docs.docker.com/compose/)
 
-### Variables de Entorno 
+### Variables de Entorno
 ```shell
-
+CUMPLIDOS_CRUD_PORT =[]
+CUMPLIDOS_CRUD_ =[]
+CUMPLIDOS_CRUD_ =[]
+CUMPLIDOS_CRUD_ =[]
 ```
-
-**NOTA:** Las variables se pueden ver en el fichero  y están identificadas con ...
+**NOTA:** Las variables se pueden ver en el fichero conf/app.conf y están identificadas con CUMPLIDOS_CRUD_...
 
 ### Ejecución del Proyecto
 ```shell
@@ -28,17 +32,18 @@ cd $GOPATH/src/github.com/udistrital/cumplidos_crud
 git pull origin develop && git checkout develop
 
 # 4. alimentar todas las variables de entorno que utiliza el proyecto.
-
+CUMPLIDOS_CRUD_PORT=8080 CUMPLIDOS_CRUD_SOME_VARIABLE bee run
 ```
 
 ### Ejecución Dockerfile
 ```shell
-
+# docker build --tag=cumplidos_crud . --no-cache
+# docker run -p 80:80 cumplidos_crud
 ```
 
 ### Ejecución docker-compose
 ```shell
-# 1. Obtener repositorio 
+# 1. Obtener repositorio
 git clone https://github.com/udistrital/cumplidos_crud.git
 # 2. Ir a la carpeta del repositorio
 cd $GOPATH/src/github.com/cumplidos_crud
@@ -50,7 +55,7 @@ docker network create back_end
 docker-compose up --build
 ```
 
-### Ejecución Pruebas 
+### Ejecución Pruebas
 
 Pruebas unitarias
 ```shell
@@ -60,11 +65,7 @@ Pruebas unitarias
 
 | Develop | Relese 0.0.1 | Master |
 | -- | -- | -- |
-| [![Build Status] | [![Build Status] | [![Build Status] |
-
-
-## Modelo de Datos
-[Modelo de Datos API CRUD Cumplidos]()
+| 1| 1| 1 |
 
 
 ## Licencia
