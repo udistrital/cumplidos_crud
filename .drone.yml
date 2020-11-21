@@ -143,7 +143,6 @@ steps:
     region:
       from_secret: AWS_REGION
     repo: ${DRONE_REPO}
-    dockerfile: CoronappAPI/Dockerfile
     tags:
       - ${DRONE_COMMIT:0:7}
       - release
@@ -163,7 +162,6 @@ steps:
     region:
       from_secret: AWS_REGION
     repo: ${DRONE_REPO}
-    dockerfile: CoronappAPI/Dockerfile
     tags:
       - ${DRONE_COMMIT:0:7}
       - latest
@@ -181,18 +179,18 @@ steps:
     AWS_SECRET_ACCESS_KEY:
       from_secret: AWS_SECRET_ACCESS_KEY
     AWS_CONTAINER:
-      from_secret: AWS_SECRET_ACCESS_KEY
+      from_secret: AWS_CONTAINER
   commands:
   - case ${DRONE_BRANCH} in
        release/*)
          AMBIENTE=test
          CLUSTER=test
-         MYCONTAINER=$${AWS_CONTAINER}/${DRONE_REPO}:release
+         MYCONTAINER=$${AWS_CONTAINER}/${DRONE_REPO##udistrital/}:release
          ;;
        master)
          AMBIENTE=prod
          CLUSTER=oas
-         MYCONTAINER=$${AWS_CONTAINER}/${DRONE_REPO}:latest
+         MYCONTAINER=$${AWS_CONTAINER}/${DRONE_REPO##udistrital/}:latest
          ;;
     esac
   - AWS_REGION=us-east-1
