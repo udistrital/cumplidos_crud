@@ -13,10 +13,16 @@ El API provee la gestion de las diferentes procesos que requiere el sistema cump
 
 ### Variables de Entorno
 ```shell
-CUMPLIDOS_CRUD_PORT =[]
-CUMPLIDOS_CRUD_ =[]
-CUMPLIDOS_CRUD_ =[]
-CUMPLIDOS_CRUD_ =[]
+# parametros de api
+CUMPLIDOS_CRUD_HTTP_PORT=[Puerto de exposición del API]
+CUMPLIDOS_CRUD_RUN_MODE=[Modo de ejecución del API]
+# paramametros de bd
+CUMPLIDOS_CRUD_PGUSER=[Usuario de BD]
+CUMPLIDOS_CRUD_PGPASS=[Contraseña del usaurio de BD]
+CUMPLIDOS_CRUD_PGURLS=[URL, Dominio o EndPoint de la BD]
+CUMPLIDOS_CRUD_PGPORT=[Puerto de la BD]
+CUMPLIDOS_CRUD_PGDB=[Nombre de Base de Datos]
+CUMPLIDOS_CRUD_PGSCHEMA=[Nombre del Esquema de Base de Datos]
 ```
 **NOTA:** Las variables se pueden ver en el fichero conf/app.conf y están identificadas con CUMPLIDOS_CRUD_...
 
