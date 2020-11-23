@@ -4,6 +4,7 @@ cumplidos_crud_.exe
 routers/commentsRouter_controllers.go
 main
 go.mod
+go.sum
 go.sumcd
 swagger.zip
 .scannerwork/
