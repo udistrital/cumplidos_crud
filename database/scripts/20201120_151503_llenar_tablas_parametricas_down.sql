@@ -1,0 +1,2 @@
+TRUNCATE TABLE cumplidos.item_informe RESTART IDENTITY CASCADE;
+TRUNCATE TABLE cumplidos.estado_pago_mensual RESTART IDENTITY CASCADE;
