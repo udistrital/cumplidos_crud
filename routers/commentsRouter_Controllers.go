@@ -7,6 +7,33 @@ import (
 
 func init() {
 
+    beego.GlobalControllerRouter["github.com/udistrital/cumplidos_crud/controllers:TrAprobacionMasivaDocumentosController"] = append(beego.GlobalControllerRouter["github.com/udistrital/cumplidos_crud/controllers:TrAprobacionMasivaDocumentosController"],
+    beego.ControllerComments{
+        Method: "Post",
+        Router: "/",
+        AllowHTTPMethods: []string{"post"},
+        MethodParams: param.Make(),
+        Filters: nil,
+        Params: nil})
+
+    beego.GlobalControllerRouter["github.com/udistrital/cumplidos_crud/controllers:TrAprobacionMasivaPagosController"] = append(beego.GlobalControllerRouter["github.com/udistrital/cumplidos_crud/controllers:TrAprobacionMasivaPagosController"],
+        beego.ControllerComments{
+            Method: "Post",
+            Router: "/",
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["github.com/udistrital/cumplidos_crud/controllers:TrAprobacionMasivaSoportesContratistasController"] = append(beego.GlobalControllerRouter["github.com/udistrital/cumplidos_crud/controllers:TrAprobacionMasivaSoportesContratistasController"],
+        beego.ControllerComments{
+            Method: "Post",
+            Router: "/",
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
     beego.GlobalControllerRouter["github.com/udistrital/cumplidos_crud/controllers:CambioEstadoPagoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/cumplidos_crud/controllers:CambioEstadoPagoController"],
         beego.ControllerComments{
             Method: "Post",

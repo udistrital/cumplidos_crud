@@ -51,6 +51,25 @@ func init() {
 				&controllers.SoportePagoMensualController{},
 			),
 		),
+
+		beego.NSNamespace("/tr_aprobacion_masiva_documentos",
+			beego.NSInclude(
+				&controllers.TrAprobacionMasivaDocumentosController{},
+			),
+		),
+
+		beego.NSNamespace("/tr_aprobacion_masiva_pagos",
+			beego.NSInclude(
+				&controllers.TrAprobacionMasivaPagosController{},
+			),
+		),
+
+		beego.NSNamespace("/tr_aprobacion_masiva_soportes_contratistas",
+			beego.NSInclude(
+				&controllers.TrAprobacionMasivaSoportesContratistasController{},
+			),
+		),
+
 	)
 	beego.AddNamespace(ns)
 }

@@ -23,7 +23,7 @@ services:
     volumes: 
         - postgres_data:/var/lib/postgresql/data
     ports: 
-        - "5434:5432"        
+        - "${CUMPLIDOS_CRUD_PGPORT}:${CUMPLIDOS_CRUD_PGPORT}"        
     env_file: 
         - .env
     networks: 

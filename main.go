@@ -7,6 +7,7 @@ import (
 	_ "github.com/lib/pq"
 	_ "github.com/udistrital/cumplidos_crud/routers"
 	"github.com/udistrital/utils_oas/customerrorv2"
+	"fmt"
 )
 
 func main() {
@@ -19,6 +20,7 @@ func main() {
 		beego.AppConfig.String("PGdb")+"?sslmode=disable&search_path="+
 		beego.AppConfig.String("PGschemas")+"")
 	if beego.BConfig.RunMode == "dev" {
+		fmt.Println("En modo dev")
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
