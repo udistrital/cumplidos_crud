@@ -695,6 +695,78 @@ paths:
           description: '{string} delete success!'
         "404":
           description: not found resource
+  /tr_aprobacion_masiva_documentos/:
+    post:
+      tags:
+      - tr_aprobacion_masiva_documentos
+      description: create Tr_aprobacion_masiva_documentos
+      operationId: TrAprobacionMasivaDocumentosController.Aprobación masiva de documentos
+      parameters:
+      - in: body
+        name: body
+        description: 'Tr_aprobacion_masiva_documentos: Aprueba documentos al tiempo para n personas'
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/models.PagoMensual'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/models.PagoMensual'
+        "403":
+          description: body is empty
+  /tr_aprobacion_masiva_pagos/:
+    post:
+      tags:
+      - tr_aprobacion_masiva_pagos
+      description: create Tr_aprobacion_masiva_pagos
+      operationId: TrAprobacionMasivaPagosController.Aprobacion masiva de pagos
+      parameters:
+      - in: body
+        name: body
+        description: 'Tr_aprobacion_masiva_pagos: Aprueba n pagos al tiempo'
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/models.PagoMensual'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/models.PagoMensual'
+        "403":
+          description: body is empty
+  /tr_aprobacion_masiva_soportes_contratistas/:
+    post:
+      tags:
+      - tr_aprobacion_masiva_soportes_contratistas
+      description: create AprobarSoportesContratistas
+      operationId: TrAprobacionMasivaSoportesContratistasController.AprobarSoportesContratistas
+      parameters:
+      - in: body
+        name: body
+        description: 'Tr_aprobacion_masiva_pagos: Aprueba n pagos al tiempo'
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/models.PagoMensual'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/models.PagoMensual'
+        "403":
+          description: body is empty
 definitions:
   models.CambioEstadoPago:
     title: CambioEstadoPago
@@ -867,3 +939,12 @@ tags:
 - name: soporte_pago_mensual
   description: |
     SoportePagoMensualController operations for SoportePagoMensual
+- name: tr_aprobacion_masiva_documentos
+  description: |
+    operations for TrAprobacionMasivaDocumentosController
+- name: tr_aprobacion_masiva_pagos
+  description: |
+    Tr_aprobacion_masiva_pagosController operations for Tr_aprobacion_masiva_pagos
+- name: tr_aprobacion_masiva_soportes_contratistas
+  description: |
+    operations for TrAprobacionMasivaSoportesContratistasController

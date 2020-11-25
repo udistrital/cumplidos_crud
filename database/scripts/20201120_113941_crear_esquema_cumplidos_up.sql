@@ -1,3 +1,4 @@
+CREATE ROLE udistrital_administrativa_app;
 CREATE SCHEMA IF NOT EXISTS cumplidos;
 ALTER SCHEMA cumplidos OWNER TO udistrital_administrativa_app;
 SET search_path TO pg_catalog,public,cumplidos;
