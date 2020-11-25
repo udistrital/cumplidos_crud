@@ -15,10 +15,10 @@ func main() {
 	orm.RegisterDataBase("default", "postgres", "postgres://"+
 		beego.AppConfig.String("PGuser")+":"+
 		beego.AppConfig.String("PGpass")+"@"+
-		beego.AppConfig.String("PGurls")+":"+
+		beego.AppConfig.String("PGurl")+":"+
 		beego.AppConfig.String("PGport")+"/"+
 		beego.AppConfig.String("PGdb")+"?sslmode=disable&search_path="+
-		beego.AppConfig.String("PGschemas")+"")
+		beego.AppConfig.String("PGschema")+"")
 	if beego.BConfig.RunMode == "dev" {
 		fmt.Println("En modo dev")
 		beego.BConfig.WebConfig.DirectoryIndex = true
