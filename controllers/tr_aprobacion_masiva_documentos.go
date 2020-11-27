@@ -24,7 +24,7 @@ func (c *TrAprobacionMasivaDocumentosController) URLMapping() {
 // @Description create Tr_aprobacion_masiva_documentos
 // @Param	body		body 	[]models.PagoMensual	true		"Tr_aprobacion_masiva_documentos: Aprueba documentos al tiempo para n personas"
 // @Success 200 {object} []models.PagoMensual
-// @Failure 403 body is empty
+// @Failure 400 body is empty
 // @router / [post]
 func (c *TrAprobacionMasivaDocumentosController) Post() {
 

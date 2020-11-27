@@ -22,7 +22,7 @@ func (c *TrAprobacionMasivaSoportesContratistasController) URLMapping() {
 // AprobarSoportesContratistas ...
 // @Title AprobarSoportesContratistas
 // @Description create AprobarSoportesContratistas
-// @Param	body		body 	[]models.PagoMensual	true		"Tr_aprobacion_masiva_pagos: Aprueba n pagos al tiempo"
+// @Param	body		body 	[]models.PagoMensual	true		"Tr_aprobacion_masiva_pagos: Aprueba documentosde n personas al tiempo"
 // @Success 200 {object} []models.PagoMensual
 // @Failure 403 body is empty
 // @router / [post]

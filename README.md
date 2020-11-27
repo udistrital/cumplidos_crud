@@ -19,7 +19,7 @@ CUMPLIDOS_CRUD_RUN_MODE=[Modo de ejecución del API]
 # paramametros de bd
 CUMPLIDOS_CRUD_PGUSER=[Usuario de BD]
 CUMPLIDOS_CRUD_PGPASS=[Contraseña del usaurio de BD]
-CUMPLIDOS_CRUD_PGURLS=[URL, Dominio o EndPoint de la BD]
+CUMPLIDOS_CRUD_PGHOST=[URL, Dominio o EndPoint de la BD]
 CUMPLIDOS_CRUD_PGPORT=[Puerto de la BD]
 CUMPLIDOS_CRUD_PGDB=[Nombre de Base de Datos]
 CUMPLIDOS_CRUD_PGSCHEMA=[Nombre del Esquema de Base de Datos]

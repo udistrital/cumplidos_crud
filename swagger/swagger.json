@@ -1084,7 +1084,7 @@
                             }
                         }
                     },
-                    "403": {
+                    "400": {
                         "description": "body is empty"
                     }
                 }
@@ -1138,7 +1138,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Tr_aprobacion_masiva_pagos: Aprueba n pagos al tiempo",
+                        "description": "Tr_aprobacion_masiva_pagos: Aprueba documentosde n personas al tiempo",
                         "required": true,
                         "schema": {
                             "type": "array",

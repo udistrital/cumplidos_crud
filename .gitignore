@@ -19,3 +19,4 @@ swagger/images/
 swagger/lang/
 swagger/lib/
 cumplidos_crud
+.env

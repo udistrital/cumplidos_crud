@@ -47,6 +47,7 @@ func GetPagoMensualById(id int) (v *PagoMensual, err error) {
 	o := orm.NewOrm()
 	v = &PagoMensual{Id: id}
 	if err = o.Read(v); err == nil {
+		fmt.Println("modelo: ",v)
 		return v, nil
 	}
 	return nil, err
