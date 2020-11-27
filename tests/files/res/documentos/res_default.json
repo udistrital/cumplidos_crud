@@ -1,0 +1,30 @@
+{
+  "Data": [
+    {
+      "Id": 70119,
+      "NumeroContrato": "DVE1933",
+      "VigenciaContrato": 2020,
+      "Mes": 7,
+      "DocumentoPersonaId": "19068729",
+      "EstadoPagoMensualId": {
+        "Id": 3,
+        "Nombre": "POR REVISAR COORDINADOR(A)",
+        "Descripcion": "EL COORDINADOR DEBE REVISAR LOS SOPORTES CARGADOS POR LOS DOCENTES",
+        "CodigoAbreviacion": "PRC",
+        "NumeroOrden": 0,
+        "Activo": true,
+        "FechaCreacion": "0001-01-01T00:00:00Z",
+        "FechaModificacion": "0001-01-01T00:00:00Z"
+      },
+      "DocumentoResponsableId": "79418769",
+      "CargoResponsable": "COORDINADOR INGENIERIA AMBIENTAL",
+      "Ano": 2020,
+      "Activo": true,
+      "FechaCreacion": "0001-01-01T00:00:00Z",
+      "FechaModificacion": "2020-07-14T21:47:08.390512Z"
+    }
+  ],
+  "Message": "Successful modification",
+  "Status": "200",
+  "Success": true
+}
