@@ -47,7 +47,7 @@ func GetPagoMensualById(id int) (v *PagoMensual, err error) {
 	o := orm.NewOrm()
 	v = &PagoMensual{Id: id}
 	if err = o.Read(v); err == nil {
-		fmt.Println("modelo: ",v)
+		fmt.Println("modelo: ", v)
 		return v, nil
 	}
 	return nil, err
@@ -65,6 +65,9 @@ func GetAllPagoMensual(query map[string]string, fields []string, sortby []string
 		k = strings.Replace(k, ".", "__", -1)
 		if strings.Contains(k, "isnull") {
 			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else if strings.Contains(k, "in") {
+			arr := strings.Split(v, "|")
+			qs = qs.Filter(k, arr)
 		} else {
 			qs = qs.Filter(k, v)
 		}
