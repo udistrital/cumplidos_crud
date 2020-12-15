@@ -1,5 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS cumplidos;
-ALTER SCHEMA cumplidos OWNER TO udistrital_administrativa_app;
+
 SET search_path TO pg_catalog,public,cumplidos;
 CREATE TABLE cumplidos.pago_mensual (
 	id serial NOT NULL,
