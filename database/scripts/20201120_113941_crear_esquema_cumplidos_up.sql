@@ -77,7 +77,6 @@ CREATE TABLE IF NOT EXISTS  cumplidos.cambio_estado_pago (
 	fecha_modificacion timestamp NOT NULL,
 	CONSTRAINT pk_cambio_estado_pago PRIMARY KEY (id)
 );
-ALTER TABLE cumplidos.cambio_estado_pago;
 ALTER TABLE cumplidos.cambio_estado_pago ADD CONSTRAINT fk_cambio_estado_pago_pago_mensual FOREIGN KEY (pago_mensual_id)
 REFERENCES cumplidos.pago_mensual (id) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
