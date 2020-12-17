@@ -864,8 +864,7 @@ definitions:
         type: integer
         format: int64
       ItemInformeId:
-        type: integer
-        format: int64
+        $ref: '#/definitions/models.ItemInforme'
       TipoContratoId:
         type: integer
         format: int64
