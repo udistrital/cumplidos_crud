@@ -1371,8 +1371,7 @@
                     "format": "int64"
                 },
                 "ItemInformeTipoContratoId": {
-                    "type": "integer",
-                    "format": "int64"
+                    "$ref": "#/definitions/models.ItemInformeTipoContrato"
                 },
                 "PagoMensualId": {
                     "$ref": "#/definitions/models.PagoMensual"
