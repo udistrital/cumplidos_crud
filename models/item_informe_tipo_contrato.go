@@ -11,12 +11,12 @@ import (
 )
 
 type ItemInformeTipoContrato struct {
-	Id                int       `orm:"column(id);pk;auto"`
-	ItemInformeId     int       `orm:"column(item_informe_id)"`
-	TipoContratoId    int       `orm:"column(tipo_contrato_id)"`
-	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	Id                int          `orm:"column(id);pk;auto"`
+	ItemInformeId     *ItemInforme `orm:"column(item_informe_id);rel(fk)"`
+	TipoContratoId    int          `orm:"column(tipo_contrato_id)"`
+	Activo            bool         `orm:"column(activo)"`
+	FechaCreacion     time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
 }
 
 func (t *ItemInformeTipoContrato) TableName() string {
