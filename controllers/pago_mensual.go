@@ -127,9 +127,22 @@ func (c *PagoMensualController) GetAll() {
 		}
 	}
 
+	/*	defer func() {
+		if err := recover(); err != nil {
+
+			logs.Error(err)
+			c.Data["data"] = err
+			fmt.Println("error 0: ", err)
+			c.Data["mesaage"] = err //"Error service GetAll: The request contains an incorrect parameter or no record exists"
+			c.Abort("404")
+		}
+	}() */
+
 	l, err := models.GetAllPagoMensual(query, fields, sortby, order, offset, limit)
+
 	if err != nil {
 		logs.Error(err)
+
 		c.Data["mesaage"] = "Error service GetAll: The request contains an incorrect parameter or no record exists"
 		c.Abort("404")
 	} else {
