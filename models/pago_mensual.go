@@ -38,6 +38,7 @@ func init() {
 func AddPagoMensual(m *PagoMensual) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
+	err = seguimientoAuditoria(m)
 	return
 }
 
@@ -144,6 +145,7 @@ func UpdatePagoMensualById(m *PagoMensual) (err error) {
 		var num int64
 		if num, err = o.Update(m); err == nil {
 			fmt.Println("Number of records updated in database:", num)
+			err = seguimientoAuditoria(m)
 		}
 	}
 	return
@@ -162,4 +164,23 @@ func DeletePagoMensual(id int) (err error) {
 		}
 	}
 	return
+}
+
+// funcion para agregar un cambio de estado pago de manera invisible para llevar una auditoria
+func seguimientoAuditoria(m *PagoMensual) (err error) {
+	v := CambioEstadoPago{
+		EstadoPagoMensualId:    m.EstadoPagoMensualId.Id,
+		DocumentoResponsableId: m.DocumentoResponsableId,
+		CargoResponsable:       m.CargoResponsable,
+		PagoMensualId:          m,
+		Activo:                 true,
+		FechaCreacion:          time.Time{},
+		FechaModificacion:      time.Time{},
+	}
+	if _, err := AddCambioEstadoPago(&v); err != nil {
+		///mirar porder para hacer rollback
+		return err
+	} else {
+		return nil
+	}
 }
