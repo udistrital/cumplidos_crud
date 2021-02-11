@@ -777,7 +777,7 @@
                         "description": "body for PagoMensual content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.PagoMensual"
+                            "$ref": "#/definitions/models.PagoMensualAuditoria"
                         }
                     }
                 ],
@@ -839,7 +839,7 @@
                         "description": "body for PagoMensual content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.PagoMensual"
+                            "$ref": "#/definitions/models.PagoMensualAuditoria"
                         }
                     }
                 ],
@@ -1121,7 +1121,7 @@
                             }
                         }
                     },
-                    "403": {
+                    "400": {
                         "description": "body is empty"
                     }
                 }
@@ -1158,7 +1158,7 @@
                             }
                         }
                     },
-                    "403": {
+                    "400": {
                         "description": "body is empty"
                     }
                 }
@@ -1341,6 +1341,21 @@
                 "VigenciaContrato": {
                     "type": "number",
                     "format": "double"
+                }
+            }
+        },
+        "models.PagoMensualAuditoria": {
+            "title": "PagoMensualAuditoria",
+            "type": "object",
+            "properties": {
+                "CargoEjecutor": {
+                    "type": "string"
+                },
+                "DocumentoEjecutor": {
+                    "type": "string"
+                },
+                "Pago": {
+                    "$ref": "#/definitions/models.PagoMensual"
                 }
             }
         },

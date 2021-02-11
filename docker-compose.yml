@@ -26,14 +26,9 @@ services:
         - "${CUMPLIDOS_CRUD_PGPORT}:${CUMPLIDOS_CRUD_PGPORT}"        
     env_file: 
         - .env
-    networks: 
-        - back_end
 
 
 
 volumes:
   go_src:
   postgres_data:
-networks: 
-  back_end:
-    external: true

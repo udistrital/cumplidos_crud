@@ -29,14 +29,14 @@ func (c *PagoMensualController) URLMapping() {
 // Post ...
 // @Title Post
 // @Description create PagoMensual
-// @Param	body		body 	models.PagoMensual	true		"body for PagoMensual content"
+// @Param	body		body 	models.PagoMensualAuditoria	true		"body for PagoMensual content"
 // @Success 201 {int} models.PagoMensual
 // @Failure 400 the request contains incorrect syntax
 // @router / [post]
 func (c *PagoMensualController) Post() {
-	var v models.PagoMensual
+	var v models.PagoMensualAuditoria
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddPagoMensual(&v); err == nil {
+		if _, err := models.AddPagoMensualAuditoria(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
 		} else {
@@ -158,17 +158,17 @@ func (c *PagoMensualController) GetAll() {
 // @Title Put
 // @Description update the PagoMensual
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.PagoMensual	true		"body for PagoMensual content"
+// @Param	body		body 	models.PagoMensualAuditoria	true		"body for PagoMensual content"
 // @Success 200 {object} models.PagoMensual
 // @Failure 400 the request contains incorrect syntax
 // @router /:id [put]
 func (c *PagoMensualController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models.PagoMensual{Id: id}
-	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if err := models.UpdatePagoMensualById(&v); err == nil {
-			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
+	x := models.PagoMensualAuditoria{Pago: &models.PagoMensual{Id: id}}
+	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &x); err == nil {
+		if err := models.UpdatePagoMensualAuditoriaById(&x); err == nil {
+			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": x}
 		} else {
 			logs.Error(err)
 			c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
