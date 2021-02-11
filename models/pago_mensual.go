@@ -7,8 +7,15 @@ import (
 	"strings"
 	"time"
 
+	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 )
+
+type PagoMensualAuditoria struct {
+	Pago              *PagoMensual
+	CargoEjecutor     string
+	DocumentoEjecutor string
+}
 
 type PagoMensual struct {
 	Id                     int                `orm:"column(id);pk;auto"`
@@ -38,7 +45,6 @@ func init() {
 func AddPagoMensual(m *PagoMensual) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
-	err = seguimientoAuditoria(m)
 	return
 }
 
@@ -136,7 +142,7 @@ func GetAllPagoMensual(query map[string]string, fields []string, sortby []string
 }
 
 // UpdatePagoMensual updates PagoMensual by Id and returns error if
-// the record to be updated doesn't exist
+// Usar update con auditoria par actualizar un pago mensual the record to be updated doesn't exist
 func UpdatePagoMensualById(m *PagoMensual) (err error) {
 	o := orm.NewOrm()
 	v := PagoMensual{Id: m.Id}
@@ -145,7 +151,6 @@ func UpdatePagoMensualById(m *PagoMensual) (err error) {
 		var num int64
 		if num, err = o.Update(m); err == nil {
 			fmt.Println("Number of records updated in database:", num)
-			err = seguimientoAuditoria(m)
 		}
 	}
 	return
@@ -167,20 +172,71 @@ func DeletePagoMensual(id int) (err error) {
 }
 
 // funcion para agregar un cambio de estado pago de manera invisible para llevar una auditoria
-func seguimientoAuditoria(m *PagoMensual) (err error) {
-	v := CambioEstadoPago{
-		EstadoPagoMensualId:    m.EstadoPagoMensualId.Id,
-		DocumentoResponsableId: m.DocumentoResponsableId,
-		CargoResponsable:       m.CargoResponsable,
-		PagoMensualId:          m,
+func seguimientoAuditoria(m *PagoMensualAuditoria) (v CambioEstadoPago) {
+	v = CambioEstadoPago{
+		EstadoPagoMensualId:    m.Pago.EstadoPagoMensualId.Id,
+		DocumentoResponsableId: m.DocumentoEjecutor,
+		CargoResponsable:       m.CargoEjecutor,
+		PagoMensualId:          m.Pago,
 		Activo:                 true,
 		FechaCreacion:          time.Time{},
 		FechaModificacion:      time.Time{},
 	}
-	if _, err := AddCambioEstadoPago(&v); err != nil {
-		///mirar porder para hacer rollback
-		return err
-	} else {
-		return nil
+	return v
+}
+
+func UpdatePagoMensualAuditoriaById(m *PagoMensualAuditoria) (err error) {
+	o := orm.NewOrm()
+	err = o.Begin()
+
+	defer func() {
+		if r := recover(); r != nil {
+			logs.Error(r)
+			o.Rollback()
+		} else {
+			o.Commit()
+		}
+
+	}()
+
+	v := PagoMensual{Id: m.Pago.Id}
+	// ascertain id exists in the database
+	if err = o.Read(&v); err == nil {
+		if _, err = o.Update(m.Pago); err != nil {
+			panic(err)
+		} else {
+			s := seguimientoAuditoria(m)
+			if _, err := o.Insert(&s); err != nil {
+				panic(err)
+			}
+		}
 	}
+	return
+}
+
+func AddPagoMensualAuditoria(m *PagoMensualAuditoria) (id int64, err error) {
+	o := orm.NewOrm()
+	err = o.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			logs.Error(r)
+			o.Rollback()
+		} else {
+			o.Commit()
+		}
+
+	}()
+
+	if id, err = o.Insert(m.Pago); err != nil {
+		logs.Error(err)
+		panic(err)
+	} else {
+		v := seguimientoAuditoria(m)
+
+		if id, err = o.Insert(&v); err != nil {
+			logs.Error(err)
+			panic(err)
+		}
+	}
+	return
 }
