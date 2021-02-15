@@ -774,7 +774,7 @@ paths:
         "400":
           description: body is empty
 definitions:
-  31555.<nil>.PagoMensual:
+  31684.<nil>.PagoMensual:
     title: PagoMensual
     type: object
   models.ArregloPagoMensualAuditoria:
@@ -786,7 +786,7 @@ definitions:
       DocumentoEjecutor:
         type: string
       Pagos:
-        $ref: '#/definitions/31555.<nil>.PagoMensual'
+        $ref: '#/definitions/31684.<nil>.PagoMensual'
   models.CambioEstadoPago:
     title: CambioEstadoPago
     type: object

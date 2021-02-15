@@ -37,8 +37,9 @@ func AprobarPagos(m *ArregloPagoMensualAuditoria) (err error) {
 	}()
 
 	for _, v := range *m.Pagos {
+
 		v.EstadoPagoMensualId.Id = 5
-		if _, err = o.Update(&v); err != nil {
+		if _, err = o.Update(&v, "estado_pago_mensual_id", "fecha_modificacion"); err != nil {
 			panic(err)
 		} else {
 			s := seguimientoAuditoria(&v, m.CargoEjecutor, m.DocumentoEjecutor)
