@@ -29,27 +29,28 @@ func UpdatePagoMensualAuditoriaById(m *PagoMensualAuditoria) (err error) {
 
 	}()
 
-	v := PagoMensual{Id: m.Pago.Id}
+	//v := PagoMensual{Id: m.Pago.Id}
 	// ascertain id exists in the database
-	if err = o.Read(&v); err == nil {
-		if _, err = o.Update(m.Pago); err != nil {
+	//if err = o.Read(&v); err == nil {
+	//m.Pago.FechaCreacion = v.FechaCreacion
+	if _, err = o.Update(m.Pago, "estado_pago_mensual_id", "documento_responsable_id", "cargo_responsable", "fecha_modificacion"); err != nil {
+		panic(err)
+	} else {
+		s := seguimientoAuditoria(m.Pago, m.CargoEjecutor, m.DocumentoEjecutor)
+		// Se cambian los estados anteriores activos
+		if _, err := o.QueryTable("cambio_estado_pago").Filter("pago_mensual_id", m.Pago.Id).Filter("activo", true).Update(orm.Params{
+			"activo":             false,
+			"fecha_modificacion": time.Now(),
+		}); err != nil {
 			panic(err)
 		} else {
-			s := seguimientoAuditoria(m.Pago, m.CargoEjecutor, m.DocumentoEjecutor)
-			// Se cambian los estados anteriores activos
-			if _, err := o.QueryTable("cambio_estado_pago").Filter("pago_mensual_id", m.Pago.Id).Filter("activo", true).Update(orm.Params{
-				"activo":             false,
-				"fecha_modificacion": time.Now(),
-			}); err != nil {
-				panic(err)
-			} else {
 
-				if _, err := o.Insert(&s); err != nil {
-					panic(err)
-				}
+			if _, err := o.Insert(&s); err != nil {
+				panic(err)
 			}
 		}
 	}
+	//}
 	return
 }
 

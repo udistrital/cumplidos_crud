@@ -1163,7 +1163,7 @@
         }
     },
     "definitions": {
-        "31555.\u003cnil\u003e.PagoMensual": {
+        "31684.\u003cnil\u003e.PagoMensual": {
             "title": "PagoMensual",
             "type": "object"
         },
@@ -1178,7 +1178,7 @@
                     "type": "string"
                 },
                 "Pagos": {
-                    "$ref": "#/definitions/31555.\u003cnil\u003e.PagoMensual"
+                    "$ref": "#/definitions/31684.\u003cnil\u003e.PagoMensual"
                 }
             }
         },
