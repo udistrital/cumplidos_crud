@@ -34,11 +34,12 @@ func (c *PagoMensualController) URLMapping() {
 // @Failure 400 the request contains incorrect syntax
 // @router / [post]
 func (c *PagoMensualController) Post() {
+
 	var v models.PagoMensualAuditoria
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if _, err := models.AddPagoMensualAuditoria(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
+			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": "OK"}
 		} else {
 			logs.Error(err)
 			c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
