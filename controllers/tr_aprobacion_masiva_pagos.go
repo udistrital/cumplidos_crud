@@ -47,7 +47,7 @@ func (c *TrAprobacionMasivaPagosController) Post() {
 
 		if err = models.AprobarPagos(&v); err == nil {
 			c.Ctx.Output.SetStatus(200)
-			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Successful modification", "Data": v}
+			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Successful modification", "Data": "OK"}
 
 		} else {
 			logs.Error(err)
