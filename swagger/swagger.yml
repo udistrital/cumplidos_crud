@@ -738,9 +738,7 @@ paths:
         description: 'Tr_aprobacion_masiva_pagos: Aprueba n pagos al tiempo'
         required: true
         schema:
-          type: array
-          items:
-            $ref: '#/definitions/models.PagoMensual'
+          $ref: '#/definitions/models.ArregloPagoMensualAuditoria'
       responses:
         "200":
           description: ""
@@ -776,6 +774,19 @@ paths:
         "400":
           description: body is empty
 definitions:
+  31555.<nil>.PagoMensual:
+    title: PagoMensual
+    type: object
+  models.ArregloPagoMensualAuditoria:
+    title: ArregloPagoMensualAuditoria
+    type: object
+    properties:
+      CargoEjecutor:
+        type: string
+      DocumentoEjecutor:
+        type: string
+      Pagos:
+        $ref: '#/definitions/31555.<nil>.PagoMensual'
   models.CambioEstadoPago:
     title: CambioEstadoPago
     type: object

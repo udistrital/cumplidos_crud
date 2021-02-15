@@ -1104,10 +1104,7 @@
                         "description": "Tr_aprobacion_masiva_pagos: Aprueba n pagos al tiempo",
                         "required": true,
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/models.PagoMensual"
-                            }
+                            "$ref": "#/definitions/models.ArregloPagoMensualAuditoria"
                         }
                     }
                 ],
@@ -1166,6 +1163,25 @@
         }
     },
     "definitions": {
+        "31555.\u003cnil\u003e.PagoMensual": {
+            "title": "PagoMensual",
+            "type": "object"
+        },
+        "models.ArregloPagoMensualAuditoria": {
+            "title": "ArregloPagoMensualAuditoria",
+            "type": "object",
+            "properties": {
+                "CargoEjecutor": {
+                    "type": "string"
+                },
+                "DocumentoEjecutor": {
+                    "type": "string"
+                },
+                "Pagos": {
+                    "$ref": "#/definitions/31555.\u003cnil\u003e.PagoMensual"
+                }
+            }
+        },
         "models.CambioEstadoPago": {
             "title": "CambioEstadoPago",
             "type": "object",

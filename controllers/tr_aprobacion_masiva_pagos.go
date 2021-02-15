@@ -22,12 +22,27 @@ func (c *TrAprobacionMasivaPagosController) URLMapping() {
 // Post ...
 // @Title Aprobacion masiva de pagos
 // @Description create Tr_aprobacion_masiva_pagos
-// @Param	body		body 	[]models.PagoMensual	true		"Tr_aprobacion_masiva_pagos: Aprueba n pagos al tiempo"
+// @Param	body		body 	models.ArregloPagoMensualAuditoria	true		"Tr_aprobacion_masiva_pagos: Aprueba n pagos al tiempo"
 // @Success 200 {object} []models.PagoMensual
 // @Failure 400 body is empty
 // @router / [post]
 func (c *TrAprobacionMasivaPagosController) Post() {
-	var v []models.PagoMensual
+
+	defer func() {
+		if err := recover(); err != nil {
+			logs.Error(err)
+			localError := err.(map[string]interface{})
+			c.Data["mesaage"] = (beego.AppConfig.String("appname") + "/" + "TrAprobacionMasivaPagosController" + "/" + (localError["funcion"]).(string))
+			c.Data["data"] = (localError["err"])
+			if status, ok := localError["status"]; ok {
+				c.Abort(status.(string))
+			} else {
+				c.Abort("404")
+			}
+		}
+	}()
+
+	var v models.ArregloPagoMensualAuditoria
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 
 		if err = models.AprobarPagos(&v); err == nil {

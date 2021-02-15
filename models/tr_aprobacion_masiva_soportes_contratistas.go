@@ -22,6 +22,7 @@ func AprobarSoportesContratistas(m *[]PagoMensual) (err error) {
 			err = o.Rollback()
 		} else {
 			fmt.Println(err)
+			//seguimiento auditoria
 		}
 	}
 	err = o.Commit()
