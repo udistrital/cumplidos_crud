@@ -11,7 +11,7 @@ import (
 )
 
 type ActividadEspecifica struct {
-	Id                  int       `orm:"column(id);pk"`
+	Id                  int       `orm:"column(id);pk;auto"`
 	ActividadEspecifica string    `orm:"column(actividad_especifica)"`
 	Avance              float64   `orm:"column(avance)"`
 	FechaCreacion       time.Time `orm:"auto_now;column(fecha_creacion);type(timestamp without time zone);null"`

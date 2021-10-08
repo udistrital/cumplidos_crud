@@ -3,10 +3,11 @@ CREATE SCHEMA IF NOT EXISTS informe_gestion;
 SET search_path TO pg_catalog,public,informe_gestion;
 CREATE TABLE IF NOT EXISTS informe_gestion.informe(
 	id serial NOT NULL,
-	activo boolean NOT NULL DEFAULT TRUE,
+	activo boolean DEFAULT TRUE,
 	fecha_creacion timestamp,
 	fecha_modificacion timestamp,
 	contrato varchar(10) NOT NULL,
+	vigencia numeric(4,0) NOT NULL,
 	mes numeric(2,0) NOT NULL,
 	anio numeric(4,0) NOT NULL,
 	periodo_informe_inicio timestamp NOT NULL,

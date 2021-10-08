@@ -48,8 +48,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActividadEspecifica'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - actividad_especifica
@@ -65,8 +65,8 @@ paths:
       responses:
         "201":
           description: '{int} models.ActividadEspecifica'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /actividad_especifica/{id}:
     get:
       tags:
@@ -84,8 +84,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActividadEspecifica'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - actividad_especifica
@@ -108,8 +108,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActividadEspecifica'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - actividad_especifica
@@ -124,8 +124,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /actividad_realizada/:
     get:
       tags:
@@ -163,8 +163,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActividadRealizada'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - actividad_realizada
@@ -180,8 +180,8 @@ paths:
       responses:
         "201":
           description: '{int} models.ActividadRealizada'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /actividad_realizada/{id}:
     get:
       tags:
@@ -199,8 +199,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActividadRealizada'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - actividad_realizada
@@ -223,8 +223,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActividadRealizada'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - actividad_realizada
@@ -239,8 +239,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /cambio_estado_pago/:
     get:
       tags:
@@ -508,8 +508,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Informe'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - informe
@@ -525,8 +525,8 @@ paths:
       responses:
         "201":
           description: '{int} models.Informe'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /informe/{id}:
     get:
       tags:
@@ -544,8 +544,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Informe'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - informe
@@ -568,8 +568,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Informe'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - informe
@@ -584,8 +584,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /item_informe/:
     get:
       tags:
@@ -1119,7 +1119,7 @@ paths:
         "400":
           description: body is empty
 definitions:
-  45644.<nil>.PagoMensual:
+  45721.<nil>.PagoMensual:
     title: PagoMensual
     type: object
   models.ActividadEspecifica:
@@ -1176,7 +1176,7 @@ definitions:
       DocumentoEjecutor:
         type: string
       Pagos:
-        $ref: '#/definitions/45644.<nil>.PagoMensual'
+        $ref: '#/definitions/45721.<nil>.PagoMensual'
   models.CambioEstadoPago:
     title: CambioEstadoPago
     type: object
@@ -1259,6 +1259,9 @@ definitions:
         format: datetime
       Proceso:
         type: string
+      Vigencia:
+        type: number
+        format: double
   models.ItemInforme:
     title: ItemInforme
     type: object

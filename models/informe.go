@@ -11,11 +11,12 @@ import (
 )
 
 type Informe struct {
-	Id                   int       `orm:"column(id);pk"`
-	Activo               bool      `orm:"column(activo)"`
+	Id                   int       `orm:"column(id);pk;auto"`
+	Activo               bool      `orm:"column(activo);null"`
 	FechaCreacion        time.Time `orm:"auto_now;column(fecha_creacion);type(timestamp without time zone);null"`
 	FechaModificacion    time.Time `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone);null"`
 	Contrato             string    `orm:"column(contrato)"`
+	Vigencia             float64   `orm:"column(vigencia)"`
 	Mes                  float64   `orm:"column(mes)"`
 	Anio                 float64   `orm:"column(anio)"`
 	PeriodoInformeInicio time.Time `orm:"column(periodo_informe_inicio);type(timestamp without time zone)"`

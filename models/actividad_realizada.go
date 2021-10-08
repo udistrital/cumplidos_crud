@@ -11,7 +11,7 @@ import (
 )
 
 type ActividadRealizada struct {
-	Id                    int                  `orm:"column(id);pk"`
+	Id                    int                  `orm:"column(id);pk;auto"`
 	Actividad             string               `orm:"column(actividad)"`
 	ProductoAsociado      string               `orm:"column(producto_asociado)"`
 	Evidencia             string               `orm:"column(evidencia)"`
