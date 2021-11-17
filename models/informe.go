@@ -22,7 +22,7 @@ type Informe struct {
 	PeriodoInformeInicio time.Time `orm:"column(periodo_informe_inicio);type(timestamp without time zone)"`
 	PeriodoInformeFin    time.Time `orm:"column(periodo_informe_fin);type(timestamp without time zone)"`
 	Proceso              string    `orm:"column(proceso)"`
-	DocumentoContratista float64   `orm:"column(documento_contratista)"`
+	DocumentoContratista string    `orm:"column(documento_contratista)"`
 }
 
 func (t *Informe) TableName() string {
@@ -135,6 +135,7 @@ func GetAllInforme(query map[string]string, fields []string, sortby []string, or
 func UpdateInformeById(m *Informe) (err error) {
 	o := orm.NewOrm()
 	v := Informe{Id: m.Id}
+	v.Activo = true
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64

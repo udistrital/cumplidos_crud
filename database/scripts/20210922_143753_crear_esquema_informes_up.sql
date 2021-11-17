@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS informe_gestion.informe(
 	periodo_informe_inicio timestamp NOT NULL,
 	periodo_informe_fin timestamp NOT NULL,
 	proceso varchar(50) NOT NULL,
-	documento_contratista numeric(13,0) NOT NULL,
+	documento_contratista varchar(15) NOT NULL,
 	CONSTRAINT pk_informe PRIMARY KEY (id)
 );
 
