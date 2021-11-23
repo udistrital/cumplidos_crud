@@ -7,7 +7,8 @@ INSERT INTO cumplidos.item_informe(nombre, descripcion, codigo_abreviacion, acti
 	('OTRAS', 'Item que describe incapacidades u otro documento que considere pertinente el docente', 'OTRAS', true),
 	('CERTIFICACIÓN DE CUMPLIMIENTO',	'Item que describe el soporte de cumplido del contratista',	'CUM', true),
 	('INFORME DE GESTIÓN', 'Item que describe el soporte de informe de gestión del contratista', 'INF', true),
-	('SALUD Y PENSIÓN', 'Item que describe el soporte de pago de salud y pensión del contratista', 'SYP', true);
+	('SALUD Y PENSIÓN', 'Item que describe el soporte de pago de salud y pensión del contratista', 'SYP', true),
+	('INFORME DE GESTIÓN Y CERTIFICADO DE CUMPLIMIENTO', 'Item que describe el soporte de informe de gestión y certificado de cumplimiento del contratista', 'IGYCC', true);
 
 INSERT INTO cumplidos.estado_pago_mensual(nombre, descripcion, codigo_abreviacion, activo) VALUES
 	('POR REVISAR COORDINADOR(A)', 'EL COORDINADOR DEBE REVISAR LOS SOPORTES CARGADOS POR LOS DOCENTES', 'PRC', true),
