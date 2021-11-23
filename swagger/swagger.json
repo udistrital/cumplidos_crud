@@ -1682,7 +1682,7 @@
         }
     },
     "definitions": {
-        "45721.\u003cnil\u003e.PagoMensual": {
+        "45738.\u003cnil\u003e.PagoMensual": {
             "title": "PagoMensual",
             "type": "object"
         },
@@ -1761,7 +1761,7 @@
                     "type": "string"
                 },
                 "Pagos": {
-                    "$ref": "#/definitions/45721.\u003cnil\u003e.PagoMensual"
+                    "$ref": "#/definitions/45738.\u003cnil\u003e.PagoMensual"
                 }
             }
         },
@@ -1848,8 +1848,7 @@
                     "type": "string"
                 },
                 "DocumentoContratista": {
-                    "type": "number",
-                    "format": "double"
+                    "type": "string"
                 },
                 "FechaCreacion": {
                     "type": "string",
