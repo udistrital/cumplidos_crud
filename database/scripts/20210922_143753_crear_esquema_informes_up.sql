@@ -12,15 +12,15 @@ CREATE TABLE IF NOT EXISTS informe_gestion.informe(
 	anio numeric(4,0) NOT NULL,
 	periodo_informe_inicio timestamp NOT NULL,
 	periodo_informe_fin timestamp NOT NULL,
-	proceso varchar(50) NOT NULL,
+	proceso varchar(100) NOT NULL,
 	documento_contratista varchar(15) NOT NULL,
 	CONSTRAINT pk_informe PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS informe_gestion.actividad_especifica(
 	id serial NOT NULL,
-	actividad_especifica varchar(250) NOT NULL,
-	avance numeric(5,4) NOT NULL,
+	actividad_especifica varchar(1000) NOT NULL,
+	avance numeric(5,2) NOT NULL,
 	fecha_creacion timestamp,
 	fecha_modificacion timestamp,
 	activo boolean DEFAULT true,
@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS informe_gestion.actividad_especifica(
 
 CREATE TABLE IF NOT EXISTS informe_gestion.actividad_realizada(
 	id serial NOT NULL,
-	actividad varchar(250) NOT NULL,
-	producto_asociado varchar(50) NOT NULL,
-	evidencia varchar(250) NOT NULL,
+	actividad varchar(1000) NOT NULL,
+	producto_asociado varchar(250) NOT NULL,
+	evidencia varchar(1000) NOT NULL,
 	fecha_creacion timestamp,
 	fecha_modificacion timestamp,
 	activo boolean DEFAULT true,
