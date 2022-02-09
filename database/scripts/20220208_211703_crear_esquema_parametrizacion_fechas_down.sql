@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS parametrizacion_carga_cumplidos.fechas_carga_cumplidos CASCADE;
