@@ -87,6 +87,12 @@ func init() {
 				&controllers.ActividadRealizadaController{},
 			),
 		),
+
+		beego.NSNamespace("/fechas_carga_cumplidos",
+			beego.NSInclude(
+				&controllers.FechasCargaCumplidosController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }
