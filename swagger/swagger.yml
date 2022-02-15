@@ -1234,7 +1234,7 @@ paths:
         "400":
           description: body is empty
 definitions:
-  50601.<nil>.PagoMensual:
+  50722.<nil>.PagoMensual:
     title: PagoMensual
     type: object
   models.ActividadEspecifica:
@@ -1291,7 +1291,7 @@ definitions:
       DocumentoEjecutor:
         type: string
       Pagos:
-        $ref: '#/definitions/50601.<nil>.PagoMensual'
+        $ref: '#/definitions/50722.<nil>.PagoMensual'
   models.CambioEstadoPago:
     title: CambioEstadoPago
     type: object
