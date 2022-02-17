@@ -471,6 +471,121 @@ paths:
           description: '{string} delete success!'
         "404":
           description: not found resource
+  /fechas_carga_cumplidos/:
+    get:
+      tags:
+      - fechas_carga_cumplidos
+      description: get FechasCargaCumplidos
+      operationId: FechasCargaCumplidosController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.FechasCargaCumplidos'
+        "404":
+          description: not found resource
+    post:
+      tags:
+      - fechas_carga_cumplidos
+      description: create FechasCargaCumplidos
+      operationId: FechasCargaCumplidosController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for FechasCargaCumplidos content
+        required: true
+        schema:
+          $ref: '#/definitions/models.FechasCargaCumplidos'
+      responses:
+        "201":
+          description: '{int} models.FechasCargaCumplidos'
+        "400":
+          description: the request contains incorrect syntax
+  /fechas_carga_cumplidos/{id}:
+    get:
+      tags:
+      - fechas_carga_cumplidos
+      description: get FechasCargaCumplidos by id
+      operationId: FechasCargaCumplidosController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.FechasCargaCumplidos'
+        "404":
+          description: not found resource
+    put:
+      tags:
+      - fechas_carga_cumplidos
+      description: update the FechasCargaCumplidos
+      operationId: FechasCargaCumplidosController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for FechasCargaCumplidos content
+        required: true
+        schema:
+          $ref: '#/definitions/models.FechasCargaCumplidos'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.FechasCargaCumplidos'
+        "400":
+          description: the request contains incorrect syntax
+    delete:
+      tags:
+      - fechas_carga_cumplidos
+      description: delete the FechasCargaCumplidos
+      operationId: FechasCargaCumplidosController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "404":
+          description: not found resource
   /informe/:
     get:
       tags:
@@ -1119,7 +1234,7 @@ paths:
         "400":
           description: body is empty
 definitions:
-  45738.<nil>.PagoMensual:
+  50722.<nil>.PagoMensual:
     title: PagoMensual
     type: object
   models.ActividadEspecifica:
@@ -1176,7 +1291,7 @@ definitions:
       DocumentoEjecutor:
         type: string
       Pagos:
-        $ref: '#/definitions/45738.<nil>.PagoMensual'
+        $ref: '#/definitions/50722.<nil>.PagoMensual'
   models.CambioEstadoPago:
     title: CambioEstadoPago
     type: object
@@ -1223,6 +1338,38 @@ definitions:
       Nombre:
         type: string
       NumeroOrden:
+        type: number
+        format: double
+  models.FechasCargaCumplidos:
+    title: FechasCargaCumplidos
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      Anio:
+        type: number
+        format: double
+      Dependencia:
+        type: string
+      DocumentoSupervisor:
+        type: number
+        format: double
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaFin:
+        type: string
+        format: datetime
+      FechaInicio:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      Mes:
         type: number
         format: double
   models.Informe:
@@ -1410,3 +1557,6 @@ tags:
 - name: actividad_realizada
   description: |
     ActividadRealizadaController operations for ActividadRealizada
+- name: fechas_carga_cumplidos
+  description: |
+    FechasCargaCumplidosController operations for FechasCargaCumplidos

@@ -11,11 +11,11 @@ import (
 )
 
 type FechasCargaCumplidos struct {
-	Id                  int       `orm:"column(id);pk"`
+	Id                  int       `orm:"column(id);pk;auto"`
 	DocumentoSupervisor float64   `orm:"column(documento_supervisor)"`
 	Activo              bool      `orm:"column(activo)"`
-	FechaCreacion       time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion   time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion       time.Time `orm:"auto_now;column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion   time.Time `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone)"`
 	FechaInicio         time.Time `orm:"column(fecha_inicio);type(timestamp without time zone);null"`
 	FechaFin            time.Time `orm:"column(fecha_fin);type(timestamp without time zone);null"`
 	Anio                float64   `orm:"column(anio);null"`
@@ -62,6 +62,9 @@ func GetAllFechasCargaCumplidos(query map[string]string, fields []string, sortby
 		k = strings.Replace(k, ".", "__", -1)
 		if strings.Contains(k, "isnull") {
 			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else if strings.Contains(k, "in") {
+			arr := strings.Split(v, "|")
+			qs = qs.Filter(k, arr)
 		} else {
 			qs = qs.Filter(k, v)
 		}
