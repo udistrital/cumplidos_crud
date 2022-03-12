@@ -70,6 +70,29 @@ func init() {
 			),
 		),
 
+		beego.NSNamespace("/informe",
+			beego.NSInclude(
+				&controllers.InformeController{},
+			),
+		),
+
+		beego.NSNamespace("/actividad_especifica",
+			beego.NSInclude(
+				&controllers.ActividadEspecificaController{},
+			),
+		),
+
+		beego.NSNamespace("/actividad_realizada",
+			beego.NSInclude(
+				&controllers.ActividadRealizadaController{},
+			),
+		),
+
+		beego.NSNamespace("/fechas_carga_cumplidos",
+			beego.NSInclude(
+				&controllers.FechasCargaCumplidosController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }
