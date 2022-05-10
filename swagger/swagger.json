@@ -1855,7 +1855,7 @@
         }
     },
     "definitions": {
-        "50722.\u003cnil\u003e.PagoMensual": {
+        "51737.\u003cnil\u003e.PagoMensual": {
             "title": "PagoMensual",
             "type": "object"
         },
@@ -1934,7 +1934,7 @@
                     "type": "string"
                 },
                 "Pagos": {
-                    "$ref": "#/definitions/50722.\u003cnil\u003e.PagoMensual"
+                    "$ref": "#/definitions/51737.\u003cnil\u003e.PagoMensual"
                 }
             }
         },
@@ -2201,8 +2201,15 @@
                     "type": "number",
                     "format": "double"
                 },
+                "NumeroCDP": {
+                    "type": "string"
+                },
                 "NumeroContrato": {
                     "type": "string"
+                },
+                "VigenciaCDP": {
+                    "type": "number",
+                    "format": "double"
                 },
                 "VigenciaContrato": {
                     "type": "number",
