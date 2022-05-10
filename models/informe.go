@@ -19,8 +19,8 @@ type Informe struct {
 	Vigencia             float64   `orm:"column(vigencia)"`
 	Mes                  float64   `orm:"column(mes)"`
 	Anio                 float64   `orm:"column(anio)"`
-	PeriodoInformeInicio time.Time `orm:"column(periodo_informe_inicio);type(timestamp without time zone)"`
-	PeriodoInformeFin    time.Time `orm:"column(periodo_informe_fin);type(timestamp without time zone)"`
+	PeriodoInformeInicio time.Time `orm:"column(periodo_informe_inicio);type(timestamp without time zone);null"`
+	PeriodoInformeFin    time.Time `orm:"column(periodo_informe_fin);type(timestamp without time zone);null"`
 	Proceso              string    `orm:"column(proceso)"`
 	DocumentoContratista string    `orm:"column(documento_contratista)"`
 }
@@ -64,6 +64,9 @@ func GetAllInforme(query map[string]string, fields []string, sortby []string, or
 		k = strings.Replace(k, ".", "__", -1)
 		if strings.Contains(k, "isnull") {
 			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else if strings.HasSuffix(k, "in") {
+			arr := strings.Split(v, "|")
+			qs = qs.Filter(k, arr)
 		} else {
 			qs = qs.Filter(k, v)
 		}
