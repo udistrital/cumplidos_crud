@@ -6,14 +6,10 @@ CREATE TABLE IF NOT EXISTS informe_gestion.informe(
 	activo boolean DEFAULT TRUE,
 	fecha_creacion timestamp,
 	fecha_modificacion timestamp,
-	contrato varchar(10) NOT NULL,
-	vigencia numeric(4,0) NOT NULL,
-	mes numeric(2,0) NOT NULL,
-	anio numeric(4,0) NOT NULL,
 	periodo_informe_inicio timestamp NOT NULL,
 	periodo_informe_fin timestamp NOT NULL,
 	proceso varchar(100) NOT NULL,
-	documento_contratista varchar(15) NOT NULL,
+	pago_mensual_id integer NOT NULL,
 	CONSTRAINT pk_informe PRIMARY KEY (id)
 );
 
@@ -48,3 +44,6 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE informe_gestion.actividad_realizada ADD CONSTRAINT fk_actividad_realizada_actividad_especifica FOREIGN KEY (actividad_especifica_id)
 REFERENCES informe_gestion.actividad_especifica (id) MATCH FULL
 ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE informe_gestion.informe ADD CONSTRAINT fk_informe_pago_mensual FOREIGN KEY (pago_mensual_id)
+REFERENCES cumplidos.pago_mensual (id) MATCH FULL
+ON DELETE NO ACTION ON UPDATE CASCADE;
