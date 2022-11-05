@@ -17,8 +17,8 @@ type EstadoPagoMensual struct {
 	CodigoAbreviacion string    `orm:"column(codigo_abreviacion);null"`
 	NumeroOrden       float64   `orm:"column(numero_orden);null"`
 	Activo            bool      `orm:"column(activo)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone);null"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
 }
 
 func (t *EstadoPagoMensual) TableName() string {
@@ -60,6 +60,9 @@ func GetAllEstadoPagoMensual(query map[string]string, fields []string, sortby []
 		k = strings.Replace(k, ".", "__", -1)
 		if strings.Contains(k, "isnull") {
 			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else if strings.HasSuffix(k, "in") {
+			arr := strings.Split(v, "|")
+			qs = qs.Filter(k, arr)
 		} else {
 			qs = qs.Filter(k, v)
 		}

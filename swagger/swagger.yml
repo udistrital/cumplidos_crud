@@ -1234,7 +1234,7 @@ paths:
         "400":
           description: body is empty
 definitions:
-  50722.<nil>.PagoMensual:
+  51544.<nil>.PagoMensual:
     title: PagoMensual
     type: object
   models.ActividadEspecifica:
@@ -1291,7 +1291,7 @@ definitions:
       DocumentoEjecutor:
         type: string
       Pagos:
-        $ref: '#/definitions/50722.<nil>.PagoMensual'
+        $ref: '#/definitions/51544.<nil>.PagoMensual'
   models.CambioEstadoPago:
     title: CambioEstadoPago
     type: object
@@ -1378,13 +1378,6 @@ definitions:
     properties:
       Activo:
         type: boolean
-      Anio:
-        type: number
-        format: double
-      Contrato:
-        type: string
-      DocumentoContratista:
-        type: string
       FechaCreacion:
         type: string
         format: datetime
@@ -1394,9 +1387,8 @@ definitions:
       Id:
         type: integer
         format: int64
-      Mes:
-        type: number
-        format: double
+      PagoMensualId:
+        $ref: '#/definitions/models.PagoMensual'
       PeriodoInformeFin:
         type: string
         format: datetime
@@ -1405,9 +1397,6 @@ definitions:
         format: datetime
       Proceso:
         type: string
-      Vigencia:
-        type: number
-        format: double
   models.ItemInforme:
     title: ItemInforme
     type: object
@@ -1481,8 +1470,13 @@ definitions:
       Mes:
         type: number
         format: double
+      NumeroCDP:
+        type: string
       NumeroContrato:
         type: string
+      VigenciaCDP:
+        type: number
+        format: double
       VigenciaContrato:
         type: number
         format: double

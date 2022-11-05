@@ -17,8 +17,8 @@ type CambioEstadoPago struct {
 	CargoResponsable       string       `orm:"column(cargo_responsable);null"`
 	PagoMensualId          *PagoMensual `orm:"column(pago_mensual_id);rel(fk)"`
 	Activo                 bool         `orm:"column(activo)"`
-	FechaCreacion          time.Time    `orm:"auto_now;column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion      time.Time    `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion          time.Time    `orm:"auto_now;column(fecha_creacion);type(timestamp without time zone);null"`
+	FechaModificacion      time.Time    `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone);null"`
 }
 
 func (t *CambioEstadoPago) TableName() string {
@@ -60,6 +60,9 @@ func GetAllCambioEstadoPago(query map[string]string, fields []string, sortby []s
 		k = strings.Replace(k, ".", "__", -1)
 		if strings.Contains(k, "isnull") {
 			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else if strings.HasSuffix(k, "in") {
+			arr := strings.Split(v, "|")
+			qs = qs.Filter(k, arr)
 		} else {
 			qs = qs.Filter(k, v)
 		}

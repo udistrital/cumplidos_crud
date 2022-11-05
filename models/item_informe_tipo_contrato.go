@@ -15,8 +15,8 @@ type ItemInformeTipoContrato struct {
 	ItemInformeId     *ItemInforme `orm:"column(item_informe_id);rel(fk)"`
 	TipoContratoId    int          `orm:"column(tipo_contrato_id)"`
 	Activo            bool         `orm:"column(activo)"`
-	FechaCreacion     time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     time.Time    `orm:"column(fecha_creacion);type(timestamp without time zone);null"`
+	FechaModificacion time.Time    `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
 }
 
 func (t *ItemInformeTipoContrato) TableName() string {
@@ -58,6 +58,9 @@ func GetAllItemInformeTipoContrato(query map[string]string, fields []string, sor
 		k = strings.Replace(k, ".", "__", -1)
 		if strings.Contains(k, "isnull") {
 			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else if strings.HasSuffix(k, "in") {
+			arr := strings.Split(v, "|")
+			qs = qs.Filter(k, arr)
 		} else {
 			qs = qs.Filter(k, v)
 		}

@@ -14,6 +14,8 @@ CREATE TABLE IF NOT EXISTS cumplidos.pago_mensual (
 	activo boolean DEFAULT true,
 	fecha_creacion timestamp,
 	fecha_modificacion timestamp NOT NULL,
+	numero_cdp character varying(20),
+    vigencia_cdp numeric(4,0),
 	CONSTRAINT pk_pago_mensual PRIMARY KEY (id)
 
 );
