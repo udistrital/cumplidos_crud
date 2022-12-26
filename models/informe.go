@@ -11,14 +11,15 @@ import (
 )
 
 type Informe struct {
-	Id                   int          `orm:"column(id);pk;auto"`
-	Activo               bool         `orm:"column(activo);null"`
-	FechaCreacion        time.Time    `orm:"auto_now;column(fecha_creacion);type(timestamp without time zone);null"`
-	FechaModificacion    time.Time    `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone);null"`
-	PeriodoInformeInicio time.Time    `orm:"column(periodo_informe_inicio);type(timestamp without time zone);null"`
-	PeriodoInformeFin    time.Time    `orm:"column(periodo_informe_fin);type(timestamp without time zone);null"`
-	Proceso              string       `orm:"column(proceso)"`
-	PagoMensualId        *PagoMensual `orm:"column(pago_mensual_id);rel(fk)"`
+	Id                     int                    `orm:"column(id);pk;auto"`
+	Activo                 bool                   `orm:"column(activo);null"`
+	FechaCreacion          time.Time              `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone);null"`
+	FechaModificacion      time.Time              `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone);null"`
+	PeriodoInformeInicio   time.Time              `orm:"column(periodo_informe_inicio);type(timestamp without time zone);null"`
+	PeriodoInformeFin      time.Time              `orm:"column(periodo_informe_fin);type(timestamp without time zone);null"`
+	Proceso                string                 `orm:"column(proceso)"`
+	PagoMensualId          *PagoMensual           `orm:"column(pago_mensual_id);rel(fk)"`
+	ActividadesEspecificas []*ActividadEspecifica `orm:"reverse(many)"`
 }
 
 func (t *Informe) TableName() string {
@@ -35,6 +36,47 @@ func AddInforme(m *Informe) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
+}
+
+//AddInformeCompleto insert a new Informe with actividades_especificas and actividades_realizadas
+func AddInformeCompleto(m *Informe) (id int64, err error) {
+	o := orm.NewOrm()
+	if err = o.Begin(); err != nil {
+		o.Rollback()
+		err = errors.New("Error al guardar el informe, se revierte la transaccion")
+		return id, err
+	}
+	if id, err := o.Insert(m); err != nil {
+		o.Rollback()
+		err = errors.New("Error al guardar el informe, se revierte la transaccion")
+		return id, err
+	} else {
+		for _, actEsp := range m.ActividadesEspecificas {
+			var inf Informe
+			inf.Id = int(id)
+			actEsp.InformeId = &inf
+			actEsp.Activo = true
+			if id_actesp, err := o.Insert(actEsp); err != nil {
+				o.Rollback()
+				err = errors.New("Error al guardar el informe, se revierte la transaccion")
+				return id, err
+			} else {
+				for _, actRea := range actEsp.ActividadesRealizadas {
+					var act_esp ActividadEspecifica
+					act_esp.Id = int(id_actesp)
+					actRea.ActividadEspecificaId = &act_esp
+					actRea.Activo = true
+					if _, err := o.Insert(actRea); err != nil {
+						o.Rollback()
+						err = errors.New("Error al guardar el informe, se revierte la transaccion")
+						return id, err
+					}
+				}
+			}
+		}
+	}
+	err = o.Commit()
+	return id, err
 }
 
 // GetInformeById retrieves Informe by Id. Returns error if
@@ -142,6 +184,88 @@ func UpdateInformeById(m *Informe) (err error) {
 			fmt.Println("Number of records updated in database:", num)
 		}
 	}
+	return
+}
+
+// UpdateInforme updates Informe by Id with actividades_especificas and actividades_realizadas and returns error if
+// the record to be updated doesn't exist
+func UpdateInformeCompletoById(m *Informe) (err error) {
+	o := orm.NewOrm()
+	if err = o.Begin(); err != nil {
+		o.Rollback()
+		err = errors.New("Error al guardar el informe, se revierte la transaccion")
+		return err
+	}
+	v := Informe{Id: m.Id}
+	v.Activo = true
+	// ascertain id exists in the database
+	if err = o.Read(&v); err == nil {
+		var num int64
+		if num, err = o.Update(m); err == nil {
+			fmt.Println("Number of records updated in database:", num)
+			for _, actEsp := range m.ActividadesEspecificas {
+				var inf Informe
+				inf.Id = int(m.Id)
+				actEsp.InformeId = &inf
+				ae := &ActividadEspecifica{Id: actEsp.Id}
+				if err = o.Read(ae); err == nil { //la actividad existe y sera actualizada
+					if _, err := o.Update(actEsp); err != nil {
+						o.Rollback()
+						err = errors.New("Error al guardar el informe, se revierte la transaccion")
+						return err
+					} else { //procede a insertar o actualizar las actividades realizadas
+						for _, actRea := range actEsp.ActividadesRealizadas {
+							var act_esp ActividadEspecifica
+							act_esp.Id = actEsp.Id
+							actRea.ActividadEspecificaId = &act_esp
+							ar := &ActividadRealizada{Id: actRea.Id}
+							if err = o.Read(ar); err == nil { //Se valida si la actividad realizada existe
+								if _, err := o.Update(actRea); err != nil {
+									o.Rollback()
+									err = errors.New("Error al guardar el informe, se revierte la transaccion")
+									return err
+								}
+							} else { //la actividad realizada no existe y tiene que ser creada
+								actRea.Activo = true
+								if _, err := o.Insert(actRea); err != nil {
+									o.Rollback()
+									err = errors.New("Error al guardar el informe, se revierte la transaccion")
+									return err
+								}
+							}
+						}
+					}
+				} else { //la actividad especifica no existe y debe ser creada
+					actEsp.Activo = true
+					if id_actesp, err := o.Insert(actEsp); err != nil {
+						o.Rollback()
+						err = errors.New("Error al guardar el informe, se revierte la transaccion")
+						return err
+					} else {
+						for _, actRea := range actEsp.ActividadesRealizadas {
+							var act_esp ActividadEspecifica
+							act_esp.Id = int(id_actesp)
+							actRea.ActividadEspecificaId = &act_esp
+							actRea.Activo = true
+							if _, err := o.Insert(actRea); err != nil {
+								o.Rollback()
+								err = errors.New("Error al guardar el informe, se revierte la transaccion")
+								return err
+							}
+						}
+					}
+
+				}
+			}
+		} else {
+			o.Rollback()
+			return err
+		}
+	} else {
+		o.Rollback()
+		return err
+	}
+	err = o.Commit()
 	return
 }
 
