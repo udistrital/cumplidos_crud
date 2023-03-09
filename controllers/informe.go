@@ -40,14 +40,28 @@ func (c *InformeController) Post() {
 	json.Unmarshal(c.Ctx.Input.RequestBody, &test)
 	fmt.Println(test)
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		fmt.Println("informe completo", v)
 		v.Activo = true
-		if _, err := models.AddInforme(&v); err == nil {
-			c.Ctx.Output.SetStatus(201)
-			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
+		fmt.Println(v.ActividadesEspecificas)
+		if len(v.ActividadesEspecificas) == 0 {
+			if _, err := models.AddInforme(&v); err == nil {
+				c.Ctx.Output.SetStatus(201)
+				c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
+			} else {
+				logs.Error(err)
+				c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
+				c.Abort("400")
+			}
 		} else {
-			logs.Error(err)
-			c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
-			c.Abort("400")
+			fmt.Println("informe completo")
+			if _, err := models.AddInformeCompleto(&v); err == nil {
+				c.Ctx.Output.SetStatus(201)
+				c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
+			} else {
+				logs.Error(err)
+				c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
+				c.Abort("400")
+			}
 		}
 	} else {
 		logs.Error(err)
@@ -159,13 +173,25 @@ func (c *InformeController) Put() {
 	id, _ := strconv.Atoi(idStr)
 	v := models.Informe{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if err := models.UpdateInformeById(&v); err == nil {
-			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
+		if len(v.ActividadesEspecificas) == 0 {
+			if err := models.UpdateInformeById(&v); err == nil {
+				c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
+			} else {
+				logs.Error(err)
+				c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
+				c.Abort("400")
+			}
 		} else {
-			logs.Error(err)
-			c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
-			c.Abort("400")
+			fmt.Println("update Informe completo")
+			if err := models.UpdateInformeCompletoById(&v); err == nil {
+				c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
+			} else {
+				logs.Error(err)
+				c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
+				c.Abort("400")
+			}
 		}
+
 	} else {
 		logs.Error(err)
 		c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"

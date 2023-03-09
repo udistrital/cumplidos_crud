@@ -15,7 +15,7 @@ type ActividadRealizada struct {
 	Actividad             string               `orm:"column(actividad)"`
 	ProductoAsociado      string               `orm:"column(producto_asociado)"`
 	Evidencia             string               `orm:"column(evidencia)"`
-	FechaCreacion         time.Time            `orm:"auto_now;column(fecha_creacion);type(timestamp without time zone);null"`
+	FechaCreacion         time.Time            `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone);null"`
 	FechaModificacion     time.Time            `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone);null"`
 	Activo                bool                 `orm:"column(activo);null"`
 	ActividadEspecificaId *ActividadEspecifica `orm:"column(actividad_especifica_id);rel(fk)"`

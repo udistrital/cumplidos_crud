@@ -11,13 +11,14 @@ import (
 )
 
 type ActividadEspecifica struct {
-	Id                  int       `orm:"column(id);pk;auto"`
-	ActividadEspecifica string    `orm:"column(actividad_especifica)"`
-	Avance              float64   `orm:"column(avance)"`
-	FechaCreacion       time.Time `orm:"auto_now;column(fecha_creacion);type(timestamp without time zone);null"`
-	FechaModificacion   time.Time `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone);null"`
-	Activo              bool      `orm:"column(activo);null"`
-	InformeId           *Informe  `orm:"column(informe_id);rel(fk)"`
+	Id                    int                   `orm:"column(id);pk;auto"`
+	ActividadEspecifica   string                `orm:"column(actividad_especifica)"`
+	Avance                float64               `orm:"column(avance)"`
+	FechaCreacion         time.Time             `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone);null"`
+	FechaModificacion     time.Time             `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone);null"`
+	Activo                bool                  `orm:"column(activo);null"`
+	InformeId             *Informe              `orm:"column(informe_id);rel(fk)"`
+	ActividadesRealizadas []*ActividadRealizada `orm:"reverse(many)"`
 }
 
 func (t *ActividadEspecifica) TableName() string {

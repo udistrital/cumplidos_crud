@@ -21,7 +21,7 @@ type PagoMensual struct {
 	CargoResponsable       string             `orm:"column(cargo_responsable)"`
 	Ano                    float64            `orm:"column(ano)"`
 	Activo                 bool               `orm:"column(activo)"`
-	FechaCreacion          time.Time          `orm:"auto_now;column(fecha_creacion);type(timestamp without time zone);null"`
+	FechaCreacion          time.Time          `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone);null"`
 	FechaModificacion      time.Time          `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone);null"`
 	NumeroCDP              string             `orm:"column(numero_cdp)"`
 	VigenciaCDP            float64            `orm:"column(vigencia_cdp)"`

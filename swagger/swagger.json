@@ -1855,7 +1855,7 @@
         }
     },
     "definitions": {
-        "51544.\u003cnil\u003e.PagoMensual": {
+        "55876.\u003cnil\u003e.PagoMensual": {
             "title": "PagoMensual",
             "type": "object"
         },
@@ -1865,6 +1865,12 @@
             "properties": {
                 "ActividadEspecifica": {
                     "type": "string"
+                },
+                "ActividadesRealizadas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ActividadRealizada"
+                    }
                 },
                 "Activo": {
                     "type": "boolean"
@@ -1934,7 +1940,7 @@
                     "type": "string"
                 },
                 "Pagos": {
-                    "$ref": "#/definitions/51544.\u003cnil\u003e.PagoMensual"
+                    "$ref": "#/definitions/55876.\u003cnil\u003e.PagoMensual"
                 }
             }
         },
@@ -2054,6 +2060,12 @@
             "title": "Informe",
             "type": "object",
             "properties": {
+                "ActividadesEspecificas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.ActividadEspecifica"
+                    }
+                },
                 "Activo": {
                     "type": "boolean"
                 },

@@ -1234,7 +1234,7 @@ paths:
         "400":
           description: body is empty
 definitions:
-  51544.<nil>.PagoMensual:
+  55876.<nil>.PagoMensual:
     title: PagoMensual
     type: object
   models.ActividadEspecifica:
@@ -1243,6 +1243,10 @@ definitions:
     properties:
       ActividadEspecifica:
         type: string
+      ActividadesRealizadas:
+        type: array
+        items:
+          $ref: '#/definitions/models.ActividadRealizada'
       Activo:
         type: boolean
       Avance:
@@ -1291,7 +1295,7 @@ definitions:
       DocumentoEjecutor:
         type: string
       Pagos:
-        $ref: '#/definitions/51544.<nil>.PagoMensual'
+        $ref: '#/definitions/55876.<nil>.PagoMensual'
   models.CambioEstadoPago:
     title: CambioEstadoPago
     type: object
@@ -1376,6 +1380,10 @@ definitions:
     title: Informe
     type: object
     properties:
+      ActividadesEspecificas:
+        type: array
+        items:
+          $ref: '#/definitions/models.ActividadEspecifica'
       Activo:
         type: boolean
       FechaCreacion:
