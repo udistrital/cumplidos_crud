@@ -80,6 +80,8 @@ func GetAllPagoMensual(query map[string]string, fields []string, sortby []string
 		if len(sortby) == len(order) {
 			// 1) for each sort field, there is an associated order
 			for i, v := range sortby {
+				// rewrite dot-notation to Object__Attribute
+				v = strings.Replace(v, ".", "__", -1)
 				orderby := ""
 				if order[i] == "desc" {
 					orderby = "-" + v
@@ -94,6 +96,8 @@ func GetAllPagoMensual(query map[string]string, fields []string, sortby []string
 		} else if len(sortby) != len(order) && len(order) == 1 {
 			// 2) there is exactly one order, all the sorted fields will be sorted by this order
 			for _, v := range sortby {
+				// rewrite dot-notation to Object__Attribute
+				v = strings.Replace(v, ".", "__", -1)
 				orderby := ""
 				if order[0] == "desc" {
 					orderby = "-" + v
