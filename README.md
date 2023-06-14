@@ -58,7 +58,7 @@ git checkout develop
 # 4. Crear red back_end
 docker network create back_end
 # 5. Ejecutar docker compose
-docker-compose up --build
+docker-compose up --build --remove-orphans
 ```
 
 ### Ejecución Pruebas
