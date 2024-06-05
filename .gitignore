@@ -20,3 +20,5 @@ swagger/lang/
 swagger/lib/
 cumplidos_crud
 .env
+go.mod
+go.sum
