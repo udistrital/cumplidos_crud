@@ -1,9 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"net/url"
-
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/plugins/cors"
@@ -22,13 +19,14 @@ func main() {
 		beego.AppConfig.String("PGport")+"/"+
 		beego.AppConfig.String("PGdb")+"?sslmode=disable&search_path="+
 		beego.AppConfig.String("PGschema")+"")
+	AllowedOrigins := []string{"*.udistrital.edu.co"}
 	if beego.BConfig.RunMode == "dev" {
-		fmt.Println("En modo dev")
+		AllowedOrigins = []string{"*"}
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
-		AllowOrigins: []string{"*"},
+		AllowOrigins: AllowedOrigins,
 		AllowMethods: []string{"PUT", "PATCH", "GET", "POST", "OPTIONS", "DELETE"},
 		AllowHeaders: []string{"Origin", "x-requested-with",
 			"content-type",
