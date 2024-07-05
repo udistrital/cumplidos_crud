@@ -11,6 +11,7 @@ import (
 )
 
 func main() {
+	AllowedOrigins := []string{"*.udistrital.edu.co"}
 	orm.Debug = true
 	orm.RegisterDataBase("default", "postgres", "postgres://"+
 		beego.AppConfig.String("PGuser")+":"+
@@ -19,7 +20,6 @@ func main() {
 		beego.AppConfig.String("PGport")+"/"+
 		beego.AppConfig.String("PGdb")+"?sslmode=disable&search_path="+
 		beego.AppConfig.String("PGschema")+"")
-	AllowedOrigins := []string{"*.udistrital.edu.co"}
 	if beego.BConfig.RunMode == "dev" {
 		AllowedOrigins = []string{"*"}
 		beego.BConfig.WebConfig.DirectoryIndex = true
