@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	AllowedOrigins := []string{"*.udistrital.edu.co"}
+	AllowedOrigins := []string{"*"}
 	orm.Debug = true
 	orm.RegisterDataBase("default", "postgres", "postgres://"+
 		beego.AppConfig.String("PGuser")+":"+
