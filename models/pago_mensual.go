@@ -39,6 +39,7 @@ func init() {
 // last inserted Id on success.
 func AddPagoMensual(m *PagoMensual) (id int64, err error) {
 	o := orm.NewOrm()
+	m.Activo = true
 	id, err = o.Insert(m)
 	return
 }
