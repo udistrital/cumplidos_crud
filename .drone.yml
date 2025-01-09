@@ -88,6 +88,11 @@ steps:
       from_secret: SONAR_HOST
     sonar_token:
       from_secret: SONAR_TOKEN
+  when:
+    branch:
+    - release/*
+    event:
+    - push
 
 # - name: beego_migrate
 #   image: golang:1.18
