@@ -90,6 +90,7 @@ steps:
       from_secret: SONAR_TOKEN
   when:
     branch:
+    - develop
     - release/*
     event:
     - push
