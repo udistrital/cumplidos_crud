@@ -214,25 +214,25 @@ func UpdateInformeCompletoById(m *Informe) (err error) {
 				actEsp.InformeId = &inf
 				if actEsp.Activo {
 					ae := &ActividadEspecifica{Id: actEsp.Id}
-					if err = o.Read(ae); err == nil { //la actividad existe y sera actualizada
+					if err = o.Read(ae); err == nil { // la actividad existe y sera actualizada
 						if _, err := o.Update(actEsp); err != nil {
 							o.Rollback()
 							err = errors.New("error al guardar el informe, se revierte la transaccion")
 							return err
-						} else { //procede a insertar o actualizar las actividades realizadas
+						} else { // procede a insertar o actualizar las actividades realizadas
 							for _, actRea := range actEsp.ActividadesRealizadas {
 								var act_esp ActividadEspecifica
 								act_esp.Id = actEsp.Id
 								actRea.ActividadEspecificaId = &act_esp
 								if actRea.Activo {
 									ar := &ActividadRealizada{Id: actRea.Id}
-									if err = o.Read(ar); err == nil { //Se valida si la actividad realizada existe
+									if err = o.Read(ar); err == nil { // Se valida si la actividad realizada existe
 										if _, err := o.Update(actRea); err != nil {
 											o.Rollback()
 											err = errors.New("error al guardar el informe, se revierte la transaccion")
 											return err
 										}
-									} else { //la actividad realizada no existe y tiene que ser creada
+									} else { // la actividad realizada no existe y tiene que ser creada
 										actRea.Activo = true
 										if _, err := o.Insert(actRea); err != nil {
 											o.Rollback()
@@ -243,7 +243,7 @@ func UpdateInformeCompletoById(m *Informe) (err error) {
 								}
 							}
 						}
-					} else { //la actividad especifica no existe y debe ser creada
+					} else { // la actividad especifica no existe y debe ser creada
 						actEsp.Activo = true
 						if id_actesp, err := o.Insert(actEsp); err != nil {
 							o.Rollback()
