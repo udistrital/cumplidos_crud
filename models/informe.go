@@ -34,6 +34,7 @@ func init() {
 // last inserted Id on success.
 func AddInforme(m *Informe) (id int64, err error) {
 	o := orm.NewOrm()
+	m.Activo = true
 	id, err = o.Insert(m)
 	return
 }

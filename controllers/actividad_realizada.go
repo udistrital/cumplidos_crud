@@ -36,7 +36,6 @@ func (c *ActividadRealizadaController) URLMapping() {
 func (c *ActividadRealizadaController) Post() {
 	var v models.ActividadRealizada
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		v.Activo = true
 		if _, err := models.AddActividadRealizada(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
