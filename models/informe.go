@@ -248,11 +248,12 @@ func UpdateInformeCompletoById(m *Informe) (err error) {
 							var act_esp ActividadEspecifica
 							act_esp.Id = int(id_actesp)
 							actRea.ActividadEspecificaId = &act_esp
-							actRea.Activo = true
-							if _, err := o.Insert(actRea); err != nil {
-								o.Rollback()
-								err = errors.New("error al guardar el informe, se revierte la transaccion")
-								return err
+							if actRea.Activo {
+								if _, err := o.Insert(actRea); err != nil {
+									o.Rollback()
+									err = errors.New("error al guardar el informe, se revierte la transaccion")
+									return err
+								}
 							}
 						}
 					}
