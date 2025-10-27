@@ -12,10 +12,11 @@ import (
 	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
 	"github.com/udistrital/utils_oas/customerrorv2"
 	"github.com/udistrital/utils_oas/xray"
+	security "github.com/udistrital/utils_oas/security"
 )
 
 func main() {
-	AllowedOrigins := []string{"*"}
+	AllowedOrigins := []string{"*.udistrital.edu.co"}
 	orm.Debug = true
 	orm.RegisterDataBase("default", "postgres", "postgres://"+
 		beego.AppConfig.String("PGuser")+":"+
@@ -44,6 +45,7 @@ func main() {
 	beego.ErrorController(&customerrorv2.CustomErrorController{})
 	xray.InitXRay()
 	apistatus.Init()
+	security.SetSecurityHeaders()
 	auditoria.InitMiddleware()
 	beego.Run()
 }
