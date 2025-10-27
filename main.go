@@ -11,6 +11,7 @@ import (
 	_ "github.com/udistrital/cumplidos_crud/routers"
 	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
 	"github.com/udistrital/utils_oas/customerrorv2"
+	security "github.com/udistrital/utils_oas/security"
 )
 
 func main() {
@@ -42,6 +43,7 @@ func main() {
 	}))
 	beego.ErrorController(&customerrorv2.CustomErrorController{})
 	apistatus.Init()
+	security.SetSecurityHeaders()
 	auditoria.InitMiddleware()
 	beego.Run()
 }
