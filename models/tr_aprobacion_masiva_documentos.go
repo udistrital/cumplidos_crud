@@ -6,7 +6,7 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-//funcion para la aprobación masiva de documentos
+// funcion para la aprobación masiva de documentos
 func AprobarDocumentos(m *[]PagoMensual) (err error) {
 	o := orm.NewOrm()
 

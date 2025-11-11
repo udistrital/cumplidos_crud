@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"github.com/udistrital/cumplidos_crud/models"
 	"encoding/json"
 	"fmt"
-	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
+	"github.com/udistrital/cumplidos_crud/models"
 )
 
 // operations for TrAprobacionMasivaDocumentosController
@@ -16,8 +16,6 @@ type TrAprobacionMasivaDocumentosController struct {
 func (c *TrAprobacionMasivaDocumentosController) URLMapping() {
 	c.Mapping("AprobarDocumentos", c.Post)
 }
-
-
 
 // AprobarDocumentos ...
 // @Title Aprobación masiva de documentos
@@ -31,11 +29,9 @@ func (c *TrAprobacionMasivaDocumentosController) Post() {
 	var v []models.PagoMensual
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 
-
 		if err = models.AprobarDocumentos(&v); err == nil {
 			c.Ctx.Output.SetStatus(200)
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Successful modification", "Data": v}
-
 
 		} else {
 			logs.Error(err)

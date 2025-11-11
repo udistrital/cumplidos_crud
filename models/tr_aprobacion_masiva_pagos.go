@@ -13,7 +13,7 @@ type ArregloPagoMensualAuditoria struct {
 	DocumentoEjecutor string
 }
 
-//funcion para la aprobación masiva de pagos
+// funcion para la aprobación masiva de pagos
 func AprobarPagos(m *ArregloPagoMensualAuditoria) (err error) {
 	o := orm.NewOrm()
 	err = o.Begin()
