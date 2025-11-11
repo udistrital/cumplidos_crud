@@ -1,37 +1,40 @@
 package main
 
 import (
-	"net/url"
-
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/plugins/cors"
+	"github.com/beego/beego/logs"
 	_ "github.com/lib/pq"
 	auditoria "github.com/udistrital/auditoria"
 	_ "github.com/udistrital/cumplidos_crud/routers"
 	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
 	"github.com/udistrital/utils_oas/customerrorv2"
-	"github.com/udistrital/utils_oas/xray"
+	database "github.com/udistrital/utils_oas/database"
 	security "github.com/udistrital/utils_oas/security"
+	"github.com/udistrital/utils_oas/xray"
 )
 
 func main() {
-	AllowedOrigins := []string{"*.udistrital.edu.co"}
-	orm.Debug = true
-	orm.RegisterDataBase("default", "postgres", "postgres://"+
-		beego.AppConfig.String("PGuser")+":"+
-		url.QueryEscape(beego.AppConfig.String("PGpass"))+"@"+
-		beego.AppConfig.String("PGhost")+":"+
-		beego.AppConfig.String("PGport")+"/"+
-		beego.AppConfig.String("PGdb")+"?sslmode=disable&search_path="+
-		beego.AppConfig.String("PGschema")+"")
+	conn, err := database.BuildPostgresConnectionString()
+	if err != nil {
+		logs.Error("error consultando la cadena de conexión: %v", err)
+		return
+	}
+
+	err = orm.RegisterDataBase("default", "postgres", conn)
+	if err != nil {
+		logs.Error("error al conectarse a la base de datos: %v", err)
+		return
+	}
+
 	if beego.BConfig.RunMode == "dev" {
-		AllowedOrigins = []string{"*"}
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
+
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
-		AllowOrigins: AllowedOrigins,
+		AllowOrigins: []string{"*"},
 		AllowMethods: []string{"PUT", "PATCH", "GET", "POST", "OPTIONS", "DELETE"},
 		AllowHeaders: []string{"Origin", "x-requested-with",
 			"content-type",
@@ -42,10 +45,15 @@ func main() {
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 	}))
-	beego.ErrorController(&customerrorv2.CustomErrorController{})
-	xray.InitXRay()
+
+	err = xray.InitXRay()
+	if err != nil {
+		logs.Error("error configurando AWS XRay: %v", err)
+	}
 	apistatus.Init()
 	security.SetSecurityHeaders()
 	auditoria.InitMiddleware()
+	beego.ErrorController(&customerrorv2.CustomErrorController{})
+	security.SetSecurityHeaders()
 	beego.Run()
 }
