@@ -41,7 +41,6 @@ func (c *InformeController) Post() {
 	fmt.Println(test)
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		fmt.Println("informe completo", v)
-		v.Activo = true
 		fmt.Println(v.ActividadesEspecificas)
 		if len(v.ActividadesEspecificas) == 0 {
 			if _, err := models.AddInforme(&v); err == nil {

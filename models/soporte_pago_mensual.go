@@ -17,8 +17,8 @@ type SoportePagoMensual struct {
 	ItemInformeTipoContratoId *ItemInformeTipoContrato `orm:"column(item_informe_tipo_contrato_id);rel(fk)"`
 	Aprobado                  bool                     `orm:"column(aprobado);null"`
 	Activo                    bool                     `orm:"column(activo)"`
-	FechaCreacion             time.Time                `orm:"column(fecha_creacion);type(timestamp without time zone);null"`
-	FechaModificacion         time.Time                `orm:"column(fecha_modificacion);type(timestamp without time zone);null"`
+	FechaCreacion             time.Time                `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone);null"`
+	FechaModificacion         time.Time                `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone);null"`
 }
 
 func (t *SoportePagoMensual) TableName() string {
@@ -33,6 +33,7 @@ func init() {
 // last inserted Id on success.
 func AddSoportePagoMensual(m *SoportePagoMensual) (id int64, err error) {
 	o := orm.NewOrm()
+	m.Activo = true
 	id, err = o.Insert(m)
 	return
 }

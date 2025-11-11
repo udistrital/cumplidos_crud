@@ -51,6 +51,7 @@ func main() {
 		logs.Error("error configurando AWS XRay: %v", err)
 	}
 	apistatus.Init()
+	security.SetSecurityHeaders()
 	auditoria.InitMiddleware()
 	beego.ErrorController(&customerrorv2.CustomErrorController{})
 	security.SetSecurityHeaders()
