@@ -6,7 +6,7 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-//funcion para la aprobación masiva de soportes de contratistas
+// funcion para la aprobación masiva de soportes de contratistas
 func AprobarSoportesContratistas(m *[]PagoMensual) (err error) {
 	o := orm.NewOrm()
 
