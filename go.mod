@@ -4,11 +4,9 @@ go 1.24.3
 
 require (
 	github.com/astaxie/beego v1.12.3
-	github.com/beego/beego v1.12.14
 	github.com/cucumber/godog v0.15.1
 	github.com/lib/pq v1.10.9
-	github.com/udistrital/auditoria v0.0.0-20240801050554-30b15f390b24
-	github.com/udistrital/utils_oas v0.0.0-20251106203309-c6f4d157fdb6
+	github.com/udistrital/utils_oas v0.1.0
 )
 
 require (

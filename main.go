@@ -2,20 +2,21 @@ package main
 
 import (
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/plugins/cors"
-	"github.com/beego/beego/logs"
 	_ "github.com/lib/pq"
-	auditoria "github.com/udistrital/auditoria"
 	_ "github.com/udistrital/cumplidos_crud/routers"
 	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
+	auditoria "github.com/udistrital/utils_oas/auditoria"
 	"github.com/udistrital/utils_oas/customerrorv2"
-	database "github.com/udistrital/utils_oas/database"
-	security "github.com/udistrital/utils_oas/security"
+	"github.com/udistrital/utils_oas/database"
+	"github.com/udistrital/utils_oas/security"
 	"github.com/udistrital/utils_oas/xray"
 )
 
 func main() {
+
 	conn, err := database.BuildPostgresConnectionString()
 	if err != nil {
 		logs.Error("error consultando la cadena de conexión: %v", err)
@@ -28,20 +29,23 @@ func main() {
 		return
 	}
 
-	if beego.BConfig.RunMode == "dev" {
+	allowedOrigins := []string{"*.udistrital.edu.co"}
+	if beego.BConfig.RunMode == beego.DEV {
+		allowedOrigins = []string{"*"}
+		orm.Debug = true
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
 
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
-		AllowOrigins: []string{"*"},
-		AllowMethods: []string{"PUT", "PATCH", "GET", "POST", "OPTIONS", "DELETE"},
-		AllowHeaders: []string{"Origin", "x-requested-with",
-			"content-type",
-			"accept",
-			"origin",
-			"authorization",
-			"x-csrftoken"},
+		AllowOrigins: allowedOrigins,
+		AllowMethods: []string{"DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"},
+		AllowHeaders: []string{
+			"Accept",
+			"Authorization",
+			"Content-Type",
+			"User-Agent",
+			"X-Amzn-Trace-Id"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 	}))
@@ -51,7 +55,6 @@ func main() {
 		logs.Error("error configurando AWS XRay: %v", err)
 	}
 	apistatus.Init()
-	security.SetSecurityHeaders()
 	auditoria.InitMiddleware()
 	beego.ErrorController(&customerrorv2.CustomErrorController{})
 	security.SetSecurityHeaders()
